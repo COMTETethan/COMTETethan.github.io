@@ -31,9 +31,9 @@ const portfolioSettings = {
         liveLink: "https://COMTETethan.github.io/ThreeJs/live"
       },
       {
-        title: "Project 5",
-        description: "Description for Project 5. A brief overview of what it does and technologies used.",
-        technologies: ["Node.js", "Express", "MongoDB"],
+        title: "Echec Js",
+        description: "Projet de création d'un site web de jeux d'échec à deux utilisateurs",
+        technologies: ["Javascript", "TypeScript", "Vue.js"],
         repoLink: "https://github.com/yourusername/project5",
         liveLink: "https://yourusername.github.io/project5"
       },

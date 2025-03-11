@@ -1,13 +1,9 @@
 .project-card {
     min-height: 312px;
     max-height: 312px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
 .project-card img {
-    min-height: 312px;
-    max-height: 312px;
-    flex-grow: 1;
+    min-height: 296px;
+    max-height: 296px;
 }

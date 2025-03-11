@@ -1,11 +1,13 @@
 .project-card {
     min-height: 312px;
+    max-height: 312px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
 }
 
-.project-card .carousel {
+.project-card img {
+    min-height: 312px;
     max-height: 312px;
     flex-grow: 1;
 }

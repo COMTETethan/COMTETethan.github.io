@@ -8,28 +8,26 @@ document.addEventListener("DOMContentLoaded", function() {
         let safeTitle = project.title.replace(/\s+/g, "-").toLowerCase();
 
         let projectCard = `
-            <div class="row align-items-stretch ${orderClass}">
+            <div class="row align-items-center ${orderClass}">
                 <div class="col-md-6">
-                    <div class="card project-card p-3">
-                        <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="img/${safeTitle}/img_carousel1.webp" class="d-block w-100 project-img" alt="${project.title} image">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="img/${safeTitle}/img_carousel2.webp" class="d-block w-100 project-img" alt="${project.title} image">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="img/${safeTitle}/img_carousel3.webp" class="d-block w-100 project-img" alt="${project.title} image">
-                                </div>
+                    <div id="carousel-${index}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="img/${safeTitle}/img_carousel1.webp" class="d-block w-100 project-img" alt="${project.title} image">
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            </button>
+                            <div class="carousel-item">
+                                <img src="img/${safeTitle}/img_carousel2.webp" class="d-block w-100 project-img" alt="${project.title} image">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/${safeTitle}/img_carousel3.webp" class="d-block w-100 project-img" alt="${project.title} image">
+                            </div>
                         </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${index}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-${index}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
                     </div>
                 </div>
                 <div class="col-md-6">

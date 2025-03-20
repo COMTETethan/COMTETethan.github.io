@@ -3,25 +3,18 @@ const portfolioSettings = {
     author: "COMTET Ethan",
     projects: [
       {
-        title: "Project 1",
-        description: "Description for Project 1. A brief overview of what it does and technologies used.",
-        technologies: ["HTML", "CSS", "JavaScript"],
-        repoLink: "https://github.com/yourusername/project1",
-        liveLink: "https://yourusername.github.io/project1"
+        title: "Scan Hub",
+        description: "Création d'un site pour pouvoir lire des manga et scanlation en ligne basé à l'aide de l'API de MangaDex.",
+        technologies: ["PHP", "Symfony", "Doctrine", "Twig"],
+        repoLink: "#",
+        liveLink: "#"
       },
       {
-        title: "Project 2",
-        description: "Description for Project 2. A brief overview of what it does and technologies used.",
-        technologies: ["React", "Tailwind CSS"],
-        repoLink: "https://github.com/yourusername/project2",
-        liveLink: "https://yourusername.github.io/project2"
-      },
-      {
-        title: "Project 3",
-        description: "Description for Project 3. A brief overview of what it does and technologies used.",
-        technologies: ["Vue.js", "SCSS"],
-        repoLink: "https://github.com/yourusername/project3",
-        liveLink: "https://yourusername.github.io/project3"
+        title: "Image Manip",
+        description: "Utilisation de DockerHub pour pouvoir aisaiement manipuler des images, notament si je souhaite en changer la résolution ou passer l'extension de celle-ci en Webp ou Avif.",
+        technologies: ["Docker", "PHP"],
+        repoLink: "https://hub.docker.com/repository/docker/comteteth/image-converter/general",
+        liveLink: "#"
       },
       {
         title: "Three Js",
@@ -38,11 +31,11 @@ const portfolioSettings = {
         liveLink: "https://yourusername.github.io/project5"
       },
       {
-        title: "Project 6",
-        description: "Description for Project 6. A brief overview of what it does and technologies used.",
-        technologies: ["Python", "Flask", "SQLite"],
-        repoLink: "https://github.com/yourusername/project6",
-        liveLink: "https://yourusername.github.io/project6"
+        title: "IoT Presence",
+        description: "Projet utilisant un ESP32 Light Feather pour détécter la présence de quelqu'un et suivant la luminosité capté sur l'instant ainsi que le seuil paramétré sur le site web associé, cela ouvrira la porte et allumera la lumière.",
+        technologies: ["JavaScript", "Angular", "ESP32", "Arduino"],
+        repoLink: "#",
+        liveLink: "#"
       }
     ]
   };

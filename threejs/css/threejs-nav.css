@@ -160,3 +160,73 @@
         font-size: 1rem;
     }
 }
+
+
+.btn-primary {
+  position: relative;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  border: 2px solid var(--primary-neon);
+  box-shadow: 0 0 15px var(--primary-neon);
+  z-index: 4 !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px var(--primary-neon);
+}
+
+.threejs-preview {
+  pointer-events: none;
+}
+
+
+.threejs-card-large {
+  position: relative;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.threejs-preview {
+  position: relative;
+  z-index: 1;
+  height: 400px;
+  order: 2;
+}
+
+.threejs-card-content {
+  order: 1;
+  padding-right: 0;
+  position: relative;
+  z-index: 3 !important;
+  transform: translateY(0%) !important;
+
+}
+
+@media (max-width: 992px) {
+  .threejs-card-large {
+    grid-template-columns: 1fr;
+  }
+  
+  .threejs-preview {
+    order: 1;
+    height: 300px;
+  }
+  
+  .threejs-card-content {
+    order: 2;
+  }
+}
+
+.threejs-grid {
+  overflow: visible;
+  gap: 5rem;
+}
+
+.threejs-card-large:last-child {
+  margin-bottom: 5rem;
+}

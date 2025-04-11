@@ -388,3 +388,18 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 });
+
+
+document.querySelectorAll('.threejs-card-large').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.querySelector('.btn-primary').style.transform = 'translateY(0) scale(1.1)';
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    card.querySelector('.btn-primary').style.transform = 'translateY(20px) scale(1)';
+  });
+});
+
+document.querySelectorAll('.threejs-preview canvas').forEach(canvas => {
+  canvas.style.pointerEvents = 'none';
+});

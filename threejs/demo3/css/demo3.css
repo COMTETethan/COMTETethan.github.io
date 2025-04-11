@@ -388,3 +388,34 @@
         margin-bottom: 1rem;
     }
 }
+
+.model-credits {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+.credit-item {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-left: 3px solid var(--primary-neon);
+}
+
+.credit-item a {
+    color: var(--primary-neon);
+    text-decoration: none;
+}
+
+.credit-item a:hover {
+    text-decoration: underline;
+}
+
+.license-notice {
+    color: #ff5555;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    border: 1px solid #ff5555;
+    padding: 1rem;
+    border-radius: 4px;
+}

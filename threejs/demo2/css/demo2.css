@@ -331,3 +331,13 @@
         margin-bottom: 1rem;
     }
 }
+
+.canvas-container { 
+    z-index: 1;
+    position: relative;
+  }
+  
+.controls-panel {
+    z-index: 2;
+    position: relative;
+}

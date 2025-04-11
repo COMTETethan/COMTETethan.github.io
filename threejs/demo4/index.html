@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Terrain | ThreeJS Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/fix-controls.css">
+    <link rel="stylesheet" href="css/demo4.css">
+    <!-- Preload audio files -->
+    <link rel="preload" href="../../audio/hover.mp3" as="audio">
+    <link rel="preload" href="../../audio/click.mp3" as="audio">
+    <link rel="preload" href="../../audio/success.mp3" as="audio">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Header -->
+    <header class="header-container">
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="glitch" data-text="Interactive Terrain">Interactive Terrain</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../index.html" class="navbar-brand">ETHAN.DEV</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html">ThreeJS Demos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../demo3/index.html">Previous Demo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html">All Demos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="demo-container">
+        <div class="container">
+            <div class="row">
+                <!-- 3D Canvas -->
+                <div class="col-lg-8">
+                    <div class="canvas-container" id="canvas-container"></div>
+                    <div class="terrain-controls">
+                        <div class="terrain-control-group">
+                            <button id="generate-terrain" class="btn btn-primary">Generate New Terrain</button>
+                            <button id="toggle-wireframe" class="btn btn-secondary">Toggle Wireframe</button>
+                        </div>
+                        <div class="terrain-control-group">
+                            <button id="add-water" class="btn btn-info">Add Water</button>
+                            <button id="toggle-fly" class="btn btn-warning">Toggle Fly Mode</button>
+                            <button id="screenshot-button" class="btn btn-success">Take Screenshot</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Controls Panel -->
+                <div class="col-lg-4">
+                    <div class="controls-panel">
+                        <div class="panel-section">
+                            <h3>Terrain Generation</h3>
+                            <div class="control-group">
+                                <label for="terrain-size-slider">Terrain Size</label>
+                                <input type="range" id="terrain-size-slider" class="form-range neon-slider" min="50" max="200" step="10" value="100">
+                                <span id="terrain-size-value">100</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="terrain-resolution-slider">Resolution</label>
+                                <input type="range" id="terrain-resolution-slider" class="form-range neon-slider" min="32" max="256" step="32" value="128">
+                                <span id="terrain-resolution-value">128</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="terrain-height-slider">Height Scale</label>
+                                <input type="range" id="terrain-height-slider" class="form-range neon-slider" min="5" max="40" step="1" value="20">
+                                <span id="terrain-height-value">20</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="noise-scale-slider">Noise Scale</label>
+                                <input type="range" id="noise-scale-slider" class="form-range neon-slider" min="1" max="10" step="0.1" value="3">
+                                <span id="noise-scale-value">3.0</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="terrain-type">Terrain Type</label>
+                                <select id="terrain-type" class="form-control neon-select">
+                                    <option value="mountains">Mountains</option>
+                                    <option value="hills">Rolling Hills</option>
+                                    <option value="canyon">Canyon</option>
+                                    <option value="islands">Islands</option>
+                                    <option value="alien">Alien Landscape</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Materials</h3>
+                            <div class="control-group">
+                                <label for="material-type">Material Type</label>
+                                <select id="material-type" class="form-control neon-select">
+                                    <option value="phong">Phong</option>
+                                    <option value="standard">Standard</option>
+                                    <option value="toon">Toon</option>
+                                    <option value="height">Height Map</option>
+                                    <option value="normal">Normal Map</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="use-vertex-colors" checked>
+                                    <label class="form-check-label" for="use-vertex-colors">Height-based Colors</label>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group color-pickers">
+                                <div class="color-picker-container">
+                                    <label for="low-color">Low Color</label>
+                                    <input type="color" id="low-color" class="form-control neon-color" value="#0000ff">
+                                </div>
+                                <div class="color-picker-container">
+                                    <label for="high-color">High Color</label>
+                                    <input type="color" id="high-color" class="form-control neon-color" value="#00ffff">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Environment</h3>
+                            <div class="control-group">
+                                <label for="sky-type">Sky Type</label>
+                                <select id="sky-type" class="form-control neon-select">
+                                    <option value="gradient">Gradient</option>
+                                    <option value="night">Night Sky</option>
+                                    <option value="sunset">Sunset</option>
+                                    <option value="alien">Alien Sky</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="light-intensity-slider">Light Intensity</label>
+                                <input type="range" id="light-intensity-slider" class="form-range neon-slider" min="0.1" max="2" step="0.1" value="1">
+                                <span id="light-intensity-value">1.0</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="show-fog" checked>
+                                    <label class="form-check-label" for="show-fog">Atmospheric Fog</label>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="show-particles">
+                                    <label class="form-check-label" for="show-particles">Atmospheric Particles</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Water Settings</h3>
+                            <div class="control-group">
+                                <label for="water-level-slider">Water Level</label>
+                                <input type="range" id="water-level-slider" class="form-range neon-slider" min="0" max="15" step="0.5" value="5">
+                                <span id="water-level-value">5.0</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="water-color">Water Color</label>
+                                <input type="color" id="water-color" class="form-control neon-color" value="#00ffff">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="wave-speed-slider">Wave Speed</label>
+                                <input type="range" id="wave-speed-slider" class="form-range neon-slider" min="0.1" max="2" step="0.1" value="0.5">
+                                <span id="wave-speed-value">0.5</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="wave-height-slider">Wave Height</label>
+                                <input type="range" id="wave-height-slider" class="form-range neon-slider" min="0.1" max="2" step="0.1" value="0.5">
+                                <span id="wave-height-value">0.5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="demo-info">
+                        <h2>About This Demo</h2>
+                        <p>
+                            This Interactive Terrain Generator demonstrates advanced procedural terrain generation 
+                            techniques using Three.js. The demo allows you to create and explore various types of 
+                            3D landscapes with customizable parameters and materials.
+                        </p>
+                        <p>
+                            Key features of this terrain generator include:
+                        </p>
+                        <ul>
+                            <li>Procedural terrain generation using Perlin noise algorithms</li>
+                            <li>Multiple terrain types with adjustable parameters</li>
+                            <li>Height-based vertex coloring for realistic terrain visualization</li>
+                            <li>Interactive water simulation with adjustable properties</li>
+                            <li>First-person fly mode for exploring the generated landscapes</li>
+                            <li>Various material and environment options for different visual styles</li>
+                        </ul>
+                        <p>
+                            Experiment with different settings to create unique landscapes. Try changing the terrain type, 
+                            adjusting the noise scale, or modifying the height parameters to see how they affect the 
+                            generated terrain. Add water and toggle fly mode to explore your creation from different perspectives.
+                        </p>
+                        <p>
+                            This demo showcases how Three.js can be used for procedural content generation, 
+                            which has applications in game development, virtual environments, and interactive 
+                            data visualization.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Navigation</h5>
+                    <p><a href="../../index.html">Home</a></p>
+                    <p><a href="../index.html">ThreeJS Demos</a></p>
+                    <p><a href="../demo3/index.html">Previous Demo</a></p>
+                    <p><a href="../index.html">All Demos</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <p><a href="https://threejs.org/" target="_blank">Three.js Official</a></p>
+                    <p><a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js GitHub</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Legal Information</h5>
+                    <p>© 2025 Ethan Comtet</p>
+                    <p>All rights reserved</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Designed with <i class="fas fa-heart" style="color: var(--secondary-neon);"></i> by Ethan Comtet</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/FirstPersonControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/math/ImprovedNoise.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/objects/Water.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/libs/stats.min.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="js/demo4.js"></script>
+</body>
+</html>

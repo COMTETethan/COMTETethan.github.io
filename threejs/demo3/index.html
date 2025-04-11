@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Viewer | ThreeJS Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/fix-controls.css">
+    <link rel="stylesheet" href="css/demo3.css">
+    <!-- Preload audio files -->
+    <link rel="preload" href="../../audio/hover.mp3" as="audio">
+    <link rel="preload" href="../../audio/click.mp3" as="audio">
+    <link rel="preload" href="../../audio/success.mp3" as="audio">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Header -->
+    <header class="header-container">
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="glitch" data-text="3D Model Viewer">3D Model Viewer</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../index.html" class="navbar-brand">ETHAN.DEV</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html">ThreeJS Demos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../demo2/index.html">Previous Demo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../demo4/index.html">Next Demo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="demo-container">
+        <div class="container">
+            <div class="row">
+                <!-- 3D Canvas -->
+                <div class="col-lg-8">
+                    <div class="canvas-container" id="canvas-container"></div>
+                    <div class="model-selector">
+                        <div class="model-option" data-model="robot">
+                            <div class="model-thumbnail">
+                                <img src="img/robot_thumb.jpg" alt="Robot Model">
+                            </div>
+                            <span>Robot</span>
+                        </div>
+                        <div class="model-option" data-model="spaceship">
+                            <div class="model-thumbnail">
+                                <img src="img/spaceship_thumb.jpg" alt="Spaceship Model">
+                            </div>
+                            <span>Spaceship</span>
+                        </div>
+                        <div class="model-option" data-model="futuristic_city">
+                            <div class="model-thumbnail">
+                                <img src="img/city_thumb.jpg" alt="Futuristic City Model">
+                            </div>
+                            <span>Futuristic City</span>
+                        </div>
+                        <div class="model-option" data-model="custom">
+                            <div class="model-thumbnail upload-thumbnail">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                            <span>Upload Model</span>
+                            <input type="file" id="model-upload" accept=".glb,.gltf" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Controls Panel -->
+                <div class="col-lg-4">
+                    <div class="controls-panel">
+                        <div class="panel-section">
+                            <h3>Lighting</h3>
+                            <div class="control-group">
+                                <label for="ambient-light-slider">Ambient Light</label>
+                                <input type="range" id="ambient-light-slider" class="form-range neon-slider" min="0" max="1" step="0.05" value="0.3">
+                                <span id="ambient-light-value">0.3</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="directional-light-slider">Directional Light</label>
+                                <input type="range" id="directional-light-slider" class="form-range neon-slider" min="0" max="2" step="0.1" value="1">
+                                <span id="directional-light-value">1.0</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="light-color-picker">Light Color</label>
+                                <input type="color" id="light-color-picker" class="form-control neon-color" value="#ffffff">
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="show-shadows" checked>
+                                    <label class="form-check-label" for="show-shadows">Shadows</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Materials</h3>
+                            <div class="control-group">
+                                <label for="material-type">Material Type</label>
+                                <select id="material-type" class="form-control neon-select">
+                                    <option value="standard">Standard</option>
+                                    <option value="physical">Physical</option>
+                                    <option value="toon">Toon</option>
+                                    <option value="wireframe">Wireframe</option>
+                                    <option value="normal">Normal</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="material-color-picker">Base Color</label>
+                                <input type="color" id="material-color-picker" class="form-control neon-color" value="#00ffff">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="metalness-slider">Metalness</label>
+                                <input type="range" id="metalness-slider" class="form-range neon-slider" min="0" max="1" step="0.05" value="0.5">
+                                <span id="metalness-value">0.5</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="roughness-slider">Roughness</label>
+                                <input type="range" id="roughness-slider" class="form-range neon-slider" min="0" max="1" step="0.05" value="0.2">
+                                <span id="roughness-value">0.2</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="emissive-enabled" checked>
+                                    <label class="form-check-label" for="emissive-enabled">Emissive Glow</label>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="emissive-intensity-slider">Glow Intensity</label>
+                                <input type="range" id="emissive-intensity-slider" class="form-range neon-slider" min="0" max="1" step="0.05" value="0.3">
+                                <span id="emissive-intensity-value">0.3</span>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Environment</h3>
+                            <div class="control-group">
+                                <label for="background-type">Background Type</label>
+                                <select id="background-type" class="form-control neon-select">
+                                    <option value="color">Solid Color</option>
+                                    <option value="gradient">Gradient</option>
+                                    <option value="grid">Grid</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="background-color-picker">Background Color</label>
+                                <input type="color" id="background-color-picker" class="form-control neon-color" value="#0d0d0d">
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="auto-rotate" checked>
+                                    <label class="form-check-label" for="auto-rotate">Auto Rotate</label>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <button id="reset-button" class="btn btn-primary">Reset All</button>
+                                <button id="screenshot-button" class="btn btn-secondary">Take Screenshot</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="demo-info">
+                        <h2>About This Demo</h2>
+                        <p>
+                            This interactive 3D Model Viewer demonstrates the capabilities of Three.js for loading, 
+                            displaying, and manipulating 3D models in real-time. The demo allows you to view different 
+                            3D models with customizable materials, lighting, and environment settings.
+                        </p>
+                        <p>
+                            Key features of this model viewer include:
+                        </p>
+                        <ul>
+                            <li>Multiple pre-loaded 3D models with the ability to upload your own GLTF/GLB files</li>
+                            <li>Customizable material properties including type, color, metalness, and roughness</li>
+                            <li>Adjustable lighting with shadow options</li>
+                            <li>Different background types and settings</li>
+                            <li>Camera controls for orbiting, panning, and zooming</li>
+                        </ul>
+                        <p>
+                            Experiment with different settings to see how they affect the appearance of the 3D models. 
+                            Try changing the material type, adjusting the lighting, or enabling emissive glow for a 
+                            futuristic neon effect.
+                        </p>
+                        <p>
+                            This demo showcases how Three.js can be used to create interactive 3D model viewers for 
+                            various applications such as e-commerce product visualization, architectural visualization, 
+                            or game asset previews.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Navigation</h5>
+                    <p><a href="../../index.html">Home</a></p>
+                    <p><a href="../index.html">ThreeJS Demos</a></p>
+                    <p><a href="../demo2/index.html">Previous Demo</a></p>
+                    <p><a href="../demo4/index.html">Next Demo</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <p><a href="https://threejs.org/" target="_blank">Three.js Official</a></p>
+                    <p><a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js GitHub</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Legal Information</h5>
+                    <p>© 2025 Ethan Comtet</p>
+                    <p>All rights reserved</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Designed with <i class="fas fa-heart" style="color: var(--secondary-neon);"></i> by Ethan Comtet</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/DRACOLoader.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="js/demo3.js"></script>
+</body>
+</html>

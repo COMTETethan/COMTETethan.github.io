@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThreeJS Demos | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="css/threejs-nav.css">
+    <!-- Preload audio files -->
+    <link rel="preload" href="../audio/hover.mp3" as="audio">
+    <link rel="preload" href="../audio/click.mp3" as="audio">
+    <link rel="preload" href="../audio/success.mp3" as="audio">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Header -->
+    <header class="header-container">
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="glitch" data-text="ThreeJS Demos">ThreeJS Demos</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="navbar-brand">ETHAN.DEV</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="../index.html#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#threejs">ThreeJS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ThreeJS Navigation Section -->
+    <section class="threejs-nav-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Explore ThreeJS Demos</h2>
+                <p>Discover the power of 3D visualization on the web through these interactive demos</p>
+            </div>
+
+            <div class="threejs-grid">
+                <!-- Demo 1 -->
+                <div class="threejs-card-large" data-aos="fade-up">
+                    <div class="threejs-card-content">
+                        <h3 class="threejs-card-title">3D Geometry Explorer</h3>
+                        <p class="threejs-card-description">
+                            Explore various 3D geometric shapes with interactive controls. Adjust properties like size, 
+                            color, rotation, and material to see real-time changes in the 3D environment.
+                        </p>
+                        <div class="threejs-card-features">
+                            <div class="feature">
+                                <i class="fas fa-cube"></i>
+                                <span>Multiple 3D shapes</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-palette"></i>
+                                <span>Custom materials</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-sync"></i>
+                                <span>Dynamic animations</span>
+                            </div>
+                        </div>
+                        <a href="demo1/index.html" class="btn btn-primary">Launch Demo</a>
+                    </div>
+                    <div class="threejs-preview" id="preview1"></div>
+                </div>
+
+                <!-- Demo 2 -->
+                <div class="threejs-card-large" data-aos="fade-up" data-aos-delay="100">
+                    <div class="threejs-card-content">
+                        <h3 class="threejs-card-title">Particle System</h3>
+                        <p class="threejs-card-description">
+                            Experience a dynamic particle system with physics simulation. Interact with thousands of 
+                            particles that respond to forces, collisions, and user input in real-time.
+                        </p>
+                        <div class="threejs-card-features">
+                            <div class="feature">
+                                <i class="fas fa-atom"></i>
+                                <span>Physics simulation</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-hand-pointer"></i>
+                                <span>Interactive forces</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-tint"></i>
+                                <span>Fluid dynamics</span>
+                            </div>
+                        </div>
+                        <a href="demo2/index.html" class="btn btn-primary">Launch Demo</a>
+                    </div>
+                    <div class="threejs-preview" id="preview2"></div>
+                </div>
+
+                <!-- Demo 3 -->
+                <div class="threejs-card-large" data-aos="fade-up" data-aos-delay="200">
+                    <div class="threejs-card-content">
+                        <h3 class="threejs-card-title">3D Model Viewer</h3>
+                        <p class="threejs-card-description">
+                            Load and view detailed 3D models with adjustable lighting and materials. Explore models from 
+                            different angles with intuitive camera controls and lighting options.
+                        </p>
+                        <div class="threejs-card-features">
+                            <div class="feature">
+                                <i class="fas fa-cubes"></i>
+                                <span>GLTF model loading</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>Dynamic lighting</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-camera"></i>
+                                <span>Orbit controls</span>
+                            </div>
+                        </div>
+                        <a href="demo3/index.html" class="btn btn-primary">Launch Demo</a>
+                    </div>
+                    <div class="threejs-preview" id="preview3"></div>
+                </div>
+
+                <!-- Demo 4 -->
+                <div class="threejs-card-large" data-aos="fade-up" data-aos-delay="300">
+                    <div class="threejs-card-content">
+                        <h3 class="threejs-card-title">Interactive Environment</h3>
+                        <p class="threejs-card-description">
+                            Explore a fully interactive 3D environment with dynamic elements. Navigate through the scene, 
+                            interact with objects, and experience realistic lighting and shadows.
+                        </p>
+                        <div class="threejs-card-features">
+                            <div class="feature">
+                                <i class="fas fa-mountain"></i>
+                                <span>Terrain generation</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-cloud"></i>
+                                <span>Atmospheric effects</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-gamepad"></i>
+                                <span>First-person controls</span>
+                            </div>
+                        </div>
+                        <a href="demo4/index.html" class="btn btn-primary">Launch Demo</a>
+                    </div>
+                    <div class="threejs-preview" id="preview4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Contact Information</h5>
+                    <p>Comtet Ethan</p>
+                    <p>comtet.pro@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Education</h5>
+                    <p>Bac Générale et Technologiques Math / NSI</p>
+                    <p>BUT Informatique Université Claude Bernard Lyon 1</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Legal Information</h5>
+                    <p>© 2025 Ethan Comtet</p>
+                    <p>All rights reserved</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Designed with <i class="fas fa-heart" style="color: var(--secondary-neon);"></i> by Ethan Comtet</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="js/threejs-nav.js"></script>
+</body>
+</html>

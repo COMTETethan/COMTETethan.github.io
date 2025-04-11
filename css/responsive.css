@@ -1,0 +1,544 @@
+/* Responsive styles for all new features */
+
+/* General responsive adjustments */
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 95%;
+  }
+  
+  .project-section {
+    padding: 2rem 1rem;
+  }
+  
+  .skills-container {
+    margin-top: 50px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .header-content h1 {
+    font-size: 3rem;
+  }
+  
+  .header-content p {
+    font-size: 1.2rem;
+  }
+  
+  .skills-container {
+    margin-top: 50px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Project carousel adjustments */
+  .carousel-container {
+    height: 300px;
+  }
+  
+  .carousel-slide img {
+    height: 300px;
+  }
+  
+  /* ThreeJS navigation adjustments */
+  .threejs-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .threejs-card {
+    height: 250px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .header-content p {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .mobile-menu {
+    display: flex;
+  }
+  
+  .project-card {
+    flex-direction: column;
+  }
+  
+  .project-info {
+    width: 100%;
+    padding: 1rem 0;
+  }
+  
+  .carousel-container {
+    width: 100%;
+    height: 250px;
+  }
+  
+  .carousel-slide img {
+    height: 250px;
+  }
+  
+  .skills-container {
+    margin-top: 50px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Image Manip page adjustments */
+  .converter-container {
+    flex-direction: column;
+  }
+  
+  .upload-area, .preview-area, .download-area {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  /* ThreeJS demo adjustments */
+  .threejs-nav-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .controls-container {
+    flex-direction: column;
+  }
+  
+  .control-group {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  /* Virtual World Explorer adjustments */
+  .controls-panel {
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-radius: 0;
+  }
+  
+  .tab-content {
+    max-height: 200px;
+  }
+  
+  .hud-container {
+    padding: 0.5rem;
+  }
+  
+  .hud-element {
+    margin: 0.25rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header-content h1 {
+    font-size: 2rem;
+  }
+  
+  .header-content p {
+    font-size: 0.9rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .project-title {
+    font-size: 1.2rem;
+  }
+  
+  .project-description {
+    font-size: 0.9rem;
+  }
+  
+  .carousel-container {
+    height: 200px;
+  }
+  
+  .carousel-slide img {
+    height: 200px;
+  }
+  
+  .carousel-prev, .carousel-next {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .skills-container {
+    margin-top: 50px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .skill-item {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Image Manip page adjustments */
+  .format-options {
+    flex-direction: column;
+  }
+  
+  .format-option {
+    margin-bottom: 1rem;
+  }
+  
+  .file-info {
+    flex-direction: column;
+  }
+  
+  /* ThreeJS demo adjustments */
+  .control-panel {
+    padding: 0.5rem;
+  }
+  
+  .control-group {
+    padding: 0.5rem;
+  }
+  
+  .control-label {
+    font-size: 0.8rem;
+  }
+  
+  /* Smartphone demo adjustments */
+  .model-options {
+    flex-wrap: wrap;
+  }
+  
+  .model-option {
+    width: 45%;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Virtual World Explorer adjustments */
+  .tab-btns {
+    flex-wrap: wrap;
+  }
+  
+  .tab-btn {
+    padding: 0.5rem;
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .control-row {
+    flex-direction: column;
+  }
+  
+  .control-item {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .pause-menu-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Touch-specific adjustments */
+@media (hover: none) {
+  /* Improve touch targets */
+  .carousel-prev, .carousel-next, 
+  .control-btn, .tab-btn, 
+  .format-option, .model-option {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Adjust hover states for touch */
+  .project-card:hover,
+  .skill-item:hover,
+  .threejs-card:hover,
+  .format-option:hover,
+  .model-option:hover {
+    transform: none;
+  }
+  
+  /* Add active states for touch */
+  .project-card:active,
+  .skill-item:active,
+  .threejs-card:active,
+  .format-option:active,
+  .model-option:active {
+    transform: scale(0.98);
+  }
+  
+  /* Adjust cursor effects for touch devices */
+  .custom-cursor {
+    display: none;
+  }
+  
+  /* Improve touch controls for ThreeJS demos */
+  .touch-controls {
+    display: flex;
+  }
+  
+  /* Virtual World Explorer touch controls */
+  .mobile-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    position: absolute;
+    bottom: 100px;
+    left: 20px;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .mobile-control-btn {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--neon-primary);
+    border-radius: 5px;
+    color: var(--neon-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+}
+
+/* High-DPI screen adjustments */
+@media screen and (min-resolution: 192dpi) {
+  .neon-text, .neon-border {
+    text-shadow: 0 0 5px var(--neon-primary), 
+                 0 0 10px var(--neon-primary), 
+                 0 0 15px var(--neon-primary);
+  }
+  
+  .carousel-slide img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .header-content {
+    padding: 1rem 0;
+  }
+  
+  .project-section {
+    padding: 1rem;
+  }
+  
+  .carousel-container {
+    height: 180px;
+  }
+  
+  .carousel-slide img {
+    height: 180px;
+  }
+  
+  .skills-container {
+    margin-top: 50px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  /* Image Manip page adjustments */
+  .converter-container {
+    flex-direction: row;
+  }
+  
+  .upload-area, .preview-area, .download-area {
+    width: 32%;
+  }
+  
+  /* ThreeJS demo adjustments */
+  .threejs-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Virtual World Explorer adjustments */
+  .controls-panel {
+    height: auto;
+    max-height: 40vh;
+  }
+  
+  .tab-content {
+    max-height: 25vh;
+  }
+}
+
+/* Print styles */
+@media print {
+  .header, .footer, .nav-container, 
+  .carousel-controls, .threejs-section,
+  .control-panel, .mobile-menu, .mobile-menu-btn {
+    display: none;
+  }
+  
+  .container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .project-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  .project-title, .section-title {
+    color: #000;
+    text-shadow: none;
+  }
+  
+  .neon-text, .neon-border {
+    color: #000;
+    text-shadow: none;
+    border-color: #000;
+    box-shadow: none;
+  }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .particle-container, .neon-glow, .animated-bg {
+    display: none;
+  }
+}
+
+/* Prefers dark theme - already dark, but adjust contrast */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --neon-primary: #00ffff;
+    --neon-secondary: #ff00ff;
+    --neon-tertiary: #ffff00;
+    --bg-color: #000000;
+    --text-color: #ffffff;
+  }
+}
+
+/* Prefers light theme - invert colors for accessibility */
+@media (prefers-color-scheme: light) {
+  :root {
+    --neon-primary: #0088ff;
+    --neon-secondary: #ff0088;
+    --neon-tertiary: #8800ff;
+    --bg-color: #f0f0f0;
+    --text-color: #000000;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  .project-card, .skill-item, .threejs-card,
+  .control-panel, .converter-container {
+    background-color: #ffffff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Accessibility improvements */
+@media screen and (prefers-reduced-transparency: reduce) {
+  .glass-effect, .blur-bg {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+}
+
+/* Mobile touch controls for ThreeJS demos */
+.touch-controls {
+  display: none;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+.touch-control-btn {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--neon-primary);
+  border-radius: 50%;
+  color: var(--neon-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  font-size: 1.5rem;
+}
+
+/* Mobile menu styles */
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  color: var(--neon-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu a {
+  color: var(--neon-primary);
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  color: var(--neon-secondary);
+  text-shadow: 0 0 10px var(--neon-secondary);
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: var(--neon-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}

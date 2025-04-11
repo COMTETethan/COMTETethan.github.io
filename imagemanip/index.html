@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulation d'Image | Convertisseur WebP/AVIF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="css/imagemanip.css">
+</head>
+<body>
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <header class="header-container">
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="glitch" data-text="MANIPULATION D'IMAGE">MANIPULATION D'IMAGE</h1>
+                <p class="header-subtitle">Convertissez vos images aux formats WebP ou AVIF</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="navbar-brand">ETHAN.DEV</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="../index.html#about">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#projects">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../threejs/index.html">ThreeJS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <section class="converter-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="section-title">Convertisseur d'Images</h2>
+                        <p class="section-description">
+                            Convertissez vos images JPG, JPEG ou PNG en WebP ou AVIF. Ces formats modernes offrent une meilleure compression et qualité, réduisant la taille des fichiers et améliorant le temps de chargement.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="upload-container">
+                            <div class="upload-area" id="uploadArea">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="upload-text">
+                                    <h3>Déposez votre image ici</h3>
+                                    <p>ou cliquez pour parcourir</p>
+                                    <p class="upload-formats">Formats supportés : JPG, JPEG, PNG</p>
+                                </div>
+                                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png" class="file-input" />
+                            </div>
+                            
+                            <div class="format-selection">
+                                <h3>Choisir le format de sortie</h3>
+                                <div class="format-options">
+                                    <div class="format-option active" data-format="webp">
+                                        <div class="format-icon">
+                                            <i class="fas fa-file-image"></i>
+                                        </div>
+                                        <div class="format-info">
+                                            <h4>WebP</h4>
+                                            <p>Bonne compression, support étendu</p>
+                                        </div>
+                                    </div>
+                                    <div class="format-option" data-format="avif">
+                                        <div class="format-icon">
+                                            <i class="fas fa-file-image"></i>
+                                        </div>
+                                        <div class="format-info">
+                                            <h4>AVIF</h4>
+                                            <p>Meilleure compression, format récent</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button id="convertBtn" class="convert-btn" disabled>
+                                <i class="fas fa-sync-alt"></i> Convertir l'image
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="preview-container">
+                            <div class="preview-header">
+                                <h3>Aperçu de l'image</h3>
+                                <div class="preview-info">
+                                    <span id="originalSize">Original : -- KB</span>
+                                    <span id="newSize">Converti : -- KB</span>
+                                    <span id="compressionRatio">Compression : --%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="preview-area">
+                                <div class="preview-placeholder" id="previewPlaceholder">
+                                    <i class="fas fa-image"></i>
+                                    <p>Aperçu de l'image ici</p>
+                                </div>
+                                <div class="preview-image-container" id="previewImageContainer" style="display: none;">
+                                    <img id="previewImage" src="" alt="Aperçu" />
+                                </div>
+                            </div>
+                            
+                            <div class="preview-actions" id="previewActions" style="display: none;">
+                                <button id="downloadBtn" class="download-btn">
+                                    <i class="fas fa-download"></i> Télécharger
+                                </button>
+                                <button id="resetBtn" class="reset-btn">
+                                    <i class="fas fa-redo"></i> Nouvelle conversion
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-lg-12">
+                        <div class="info-section">
+                            <h3>Pourquoi convertir en WebP/AVIF ?</h3>
+                            <div class="info-grid">
+                                <div class="info-card">
+                                    <div class="info-icon">
+                                        <i class="fas fa-compress-arrows-alt"></i>
+                                    </div>
+                                    <h4>Meilleure compression</h4>
+                                    <p>Formats modernes avec compression supérieure aux formats traditionnels.</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <div class="info-icon">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                    </div>
+                                    <h4>Chargement rapide</h4>
+                                    <p>Réduction de la taille des fichiers pour un chargement plus rapide.</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <div class="info-icon">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <h4>Haute qualité</h4>
+                                    <p>Transparence et reproduction des couleurs optimale.</p>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <div class="info-icon">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <h4>Standard moderne</h4>
+                                    <p>Formats conçus pour le web moderne, support croissant.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Navigation</h5>
+                    <p><a href="../index.html#about">About</a></p>
+                    <p><a href="../index.html#projects">Projects</a></p>
+                    <p><a href="../threejs/index.html">ThreeJS</a></p>
+                    <p><a href="../index.html#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <p><a href="https://developers.google.com/speed/webp" target="_blank">WebP Info</a></p>
+                    <p><a href="https://aomediacodec.github.io/av1-avif/" target="_blank">AVIF Info</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Legal Information</h5>
+                    <p>© 2025 Ethan Comtet</p>
+                    <p>All rights reserved</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Designed with <i class="fas fa-heart" style="color: var(--secondary-neon);"></i> by Ethan Comtet</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/animations.js"></script>
+    <script src="../js/loading.js"></script>
+    <script src="../js/responsive.js"></script>
+    <script src="js/imagemanip.js"></script>
+</body>
+</html>

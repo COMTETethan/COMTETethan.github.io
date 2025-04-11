@@ -1,0 +1,178 @@
+/* Animated Skills Styles */
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.2rem;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid var(--primary-neon);
+    color: var(--primary-neon);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    width: 120px;
+    height: 120px;
+    justify-content: center;
+}
+
+.skill-item i {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    z-index: 2;
+}
+
+.skill-item span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    z-index: 2;
+}
+
+/* Animated background */
+.skill-item::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(45deg, 
+        rgba(0, 255, 255, 0.1) 0%, 
+        rgba(0, 255, 255, 0) 25%, 
+        rgba(255, 0, 255, 0.1) 50%, 
+        rgba(255, 0, 255, 0) 75%, 
+        rgba(0, 255, 255, 0.1) 100%);
+    animation: skillGradient 8s linear infinite;
+    z-index: 1;
+}
+
+@keyframes skillGradient {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Floating animation */
+.skill-item:nth-child(odd) {
+    animation: floatSkill1 4s ease-in-out infinite;
+}
+
+.skill-item:nth-child(even) {
+    animation: floatSkill2 5s ease-in-out infinite;
+}
+
+@keyframes floatSkill1 {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes floatSkill2 {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Glow pulse animation */
+.skill-item {
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    animation: skillGlowPulse 3s infinite alternate;
+}
+
+.skill-item:nth-child(3n+1) {
+    animation-delay: 0s;
+    border-color: var(--primary-neon);
+}
+
+.skill-item:nth-child(3n+2) {
+    animation-delay: 1s;
+    border-color: var(--secondary-neon);
+}
+
+.skill-item:nth-child(3n+3) {
+    animation-delay: 2s;
+    border-color: var(--tertiary-neon);
+}
+
+@keyframes skillGlowPulse {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+    }
+}
+
+/* Icon rotation */
+.skill-item i {
+    transition: transform 0.5s ease;
+    animation: iconPulse 3s infinite alternate;
+}
+
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .skills-grid {
+        gap: 1rem;
+        justify-content: center;
+    }
+    
+    .skill-item {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .skill-item i {
+        font-size: 2rem;
+    }
+    
+    .skill-item span {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .skills-grid {
+        gap: 0.8rem;
+    }
+    
+    .skill-item {
+        width: 90px;
+        height: 90px;
+        padding: 0.8rem;
+    }
+    
+    .skill-item i {
+        font-size: 1.8rem;
+    }
+    
+    .skill-item span {
+        font-size: 0.7rem;
+    }
+}

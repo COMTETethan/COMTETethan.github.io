@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual World Explorer | ThreeJS Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/fix-controls.css">
+    <link rel="stylesheet" href="css/virtual-world.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-progress">
+            <div class="progress-bar"></div>
+            <div class="progress-text">Loading Virtual World: <span id="loading-percentage">0%</span></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Header -->
+    <header class="header-container">
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="glitch" data-text="VIRTUAL WORLD EXPLORER">VIRTUAL WORLD EXPLORER</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../index.html" class="navbar-brand">ETHAN.DEV</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html">ThreeJS Demos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../demo3/smartphone.html">Previous Demo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="demo-container">
+        <div class="container">
+            <div class="row">
+                <!-- 3D Canvas -->
+                <div class="col-lg-12">
+                    <div class="canvas-container" id="canvas-container"></div>
+                    
+                    <!-- Game UI Overlay -->
+                    <div class="game-ui">
+                        <div class="top-bar">
+                            <div class="fps-counter">FPS: <span id="fps-value">60</span></div>
+                            <div class="coordinates">
+                                X: <span id="coord-x">0</span>
+                                Y: <span id="coord-y">0</span>
+                                Z: <span id="coord-z">0</span>
+                            </div>
+                            <div class="time-display">
+                                <i class="fas fa-clock"></i> <span id="world-time">12:00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bottom-bar">
+                            <div class="health-bar">
+                                <div class="health-label">ENERGY</div>
+                                <div class="health-progress">
+                                    <div class="health-fill" id="health-fill"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="action-buttons">
+                                <button id="screenshot-btn" class="action-btn">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                                <button id="fullscreen-btn" class="action-btn">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="center-reticle">+</div>
+                        
+                        <div class="interaction-prompt" id="interaction-prompt">
+                            Press <span class="key">E</span> to interact
+                        </div>
+                    </div>
+                    
+                    <!-- Controls Panel -->
+                    <div class="controls-panel">
+                        <div class="panel-header">
+                            <h3>World Controls</h3>
+                            <button id="toggle-panel" class="toggle-btn">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="panel-content">
+                            <div class="control-tabs">
+                                <button class="tab-btn active" data-tab="environment">Environment</button>
+                                <button class="tab-btn" data-tab="physics">Physics</button>
+                                <button class="tab-btn" data-tab="effects">Effects</button>
+                                <button class="tab-btn" data-tab="gameplay">Gameplay</button>
+                            </div>
+                            
+                            <div class="tab-content active" id="environment-tab">
+                                <div class="control-group">
+                                    <label for="world-type">World Type</label>
+                                    <select id="world-type" class="neon-select">
+                                        <option value="neon-city">Neon City</option>
+                                        <option value="alien-landscape">Alien Landscape</option>
+                                        <option value="cyber-ocean">Cyber Ocean</option>
+                                        <option value="abstract-void">Abstract Void</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="time-slider">Time of Day</label>
+                                    <input type="range" id="time-slider" class="neon-slider" min="0" max="24" step="0.5" value="12">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="weather-type">Weather</label>
+                                    <select id="weather-type" class="neon-select">
+                                        <option value="clear">Clear</option>
+                                        <option value="rain">Neon Rain</option>
+                                        <option value="fog">Cyber Fog</option>
+                                        <option value="storm">Digital Storm</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input neon-switch" type="checkbox" id="auto-cycle" checked>
+                                        <label class="form-check-label" for="auto-cycle">Auto Day/Night Cycle</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-content" id="physics-tab">
+                                <div class="control-group">
+                                    <label for="gravity-slider">Gravity</label>
+                                    <input type="range" id="gravity-slider" class="neon-slider" min="0" max="2" step="0.1" value="1">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="wind-slider">Wind Strength</label>
+                                    <input type="range" id="wind-slider" class="neon-slider" min="0" max="2" step="0.1" value="0.5">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="water-level">Water Level</label>
+                                    <input type="range" id="water-level" class="neon-slider" min="0" max="1" step="0.05" value="0.3">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input neon-switch" type="checkbox" id="enable-collisions" checked>
+                                        <label class="form-check-label" for="enable-collisions">Enable Collisions</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-content" id="effects-tab">
+                                <div class="control-group">
+                                    <label for="particles-slider">Particle Density</label>
+                                    <input type="range" id="particles-slider" class="neon-slider" min="0" max="1" step="0.1" value="0.5">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="bloom-slider">Bloom Intensity</label>
+                                    <input type="range" id="bloom-slider" class="neon-slider" min="0" max="2" step="0.1" value="1">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="color-scheme">Color Scheme</label>
+                                    <select id="color-scheme" class="neon-select">
+                                        <option value="cyberpunk">Cyberpunk</option>
+                                        <option value="synthwave">Synthwave</option>
+                                        <option value="matrix">Matrix</option>
+                                        <option value="vaporwave">Vaporwave</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input neon-switch" type="checkbox" id="enable-shadows" checked>
+                                        <label class="form-check-label" for="enable-shadows">Enable Shadows</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-content" id="gameplay-tab">
+                                <div class="control-group">
+                                    <label for="movement-speed">Movement Speed</label>
+                                    <input type="range" id="movement-speed" class="neon-slider" min="0.5" max="2" step="0.1" value="1">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="view-mode">View Mode</label>
+                                    <select id="view-mode" class="neon-select">
+                                        <option value="first-person">First Person</option>
+                                        <option value="third-person">Third Person</option>
+                                        <option value="orbit">Orbit Camera</option>
+                                        <option value="top-down">Top Down</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="entity-density">Entity Density</label>
+                                    <input type="range" id="entity-density" class="neon-slider" min="0" max="1" step="0.1" value="0.5">
+                                </div>
+                                
+                                <div class="control-group">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input neon-switch" type="checkbox" id="enable-flight" checked>
+                                        <label class="form-check-label" for="enable-flight">Enable Flight</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="control-actions">
+                                <button id="reset-world" class="btn btn-secondary">Reset World</button>
+                                <button id="generate-world" class="btn btn-primary">Generate New World</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="instructions-panel">
+                        <h2>Controls & Instructions</h2>
+                        
+                        <div class="instructions-grid">
+                            <div class="instruction-card">
+                                <div class="instruction-icon">
+                                    <i class="fas fa-keyboard"></i>
+                                </div>
+                                <h3>Movement</h3>
+                                <ul>
+                                    <li><span class="key">W</span> <span class="key">A</span> <span class="key">S</span> <span class="key">D</span> - Move</li>
+                                    <li><span class="key">Space</span> - Jump/Fly Up</li>
+                                    <li><span class="key">Shift</span> - Sprint</li>
+                                    <li><span class="key">Ctrl</span> - Crouch/Fly Down</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="instruction-card">
+                                <div class="instruction-icon">
+                                    <i class="fas fa-mouse"></i>
+                                </div>
+                                <h3>Camera</h3>
+                                <ul>
+                                    <li><span class="instruction-text">Mouse</span> - Look around</li>
+                                    <li><span class="key">C</span> - Toggle camera mode</li>
+                                    <li><span class="key">V</span> - Reset camera</li>
+                                    <li><span class="instruction-text">Scroll</span> - Zoom (in third-person)</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="instruction-card">
+                                <div class="instruction-icon">
+                                    <i class="fas fa-hand-pointer"></i>
+                                </div>
+                                <h3>Interaction</h3>
+                                <ul>
+                                    <li><span class="key">E</span> - Interact with objects</li>
+                                    <li><span class="key">F</span> - Toggle flashlight</li>
+                                    <li><span class="key">Q</span> - Special ability</li>
+                                    <li><span class="key">R</span> - Reset position</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="instruction-card">
+                                <div class="instruction-icon">
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                                <h3>System</h3>
+                                <ul>
+                                    <li><span class="key">Tab</span> - Toggle control panel</li>
+                                    <li><span class="key">P</span> - Take screenshot</li>
+                                    <li><span class="key">Esc</span> - Pause/Menu</li>
+                                    <li><span class="key">F11</span> - Fullscreen</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="about-demo">
+                            <h3>About This Demo</h3>
+                            <p>
+                                The Virtual World Explorer is an advanced ThreeJS demonstration showcasing procedural world generation, 
+                                dynamic lighting, physics simulation, and interactive gameplay elements. This demo combines multiple 
+                                advanced 3D techniques to create an immersive, explorable environment.
+                            </p>
+                            <p>
+                                Key technical features include:
+                            </p>
+                            <ul>
+                                <li>Procedural terrain generation using Perlin noise and custom algorithms</li>
+                                <li>Dynamic weather system with particle effects for rain, fog, and storms</li>
+                                <li>Realistic water simulation with reflections, refractions, and wave dynamics</li>
+                                <li>Advanced lighting system with day/night cycle and dynamic shadows</li>
+                                <li>Physics-based movement and collision detection</li>
+                                <li>Post-processing effects including bloom, color grading, and ambient occlusion</li>
+                                <li>Optimized performance using instanced rendering and level-of-detail techniques</li>
+                                <li>Interactive objects and environment elements</li>
+                            </ul>
+                            <p>
+                                Use the control panel to customize the world and experiment with different settings. 
+                                Explore the environment to discover hidden features and interactive elements.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Navigation</h5>
+                    <p><a href="../../index.html">Home</a></p>
+                    <p><a href="../index.html">ThreeJS Demos</a></p>
+                    <p><a href="../../index.html#projects">Projects</a></p>
+                    <p><a href="../../index.html#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <p><a href="https://threejs.org/" target="_blank">Three.js Official</a></p>
+                    <p><a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js GitHub</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Legal Information</h5>
+                    <p>© 2025 Ethan Comtet</p>
+                    <p>All rights reserved</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Designed with <i class="fas fa-heart" style="color: var(--secondary-neon);"></i> by Ethan Comtet</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Pause Menu -->
+    <div class="pause-menu" id="pause-menu">
+        <div class="pause-content">
+            <h2>PAUSED</h2>
+            <div class="pause-buttons">
+                <button id="resume-btn" class="pause-btn">Resume</button>
+                <button id="settings-btn" class="pause-btn">Settings</button>
+                <button id="exit-btn" class="pause-btn">Exit to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screenshot Modal -->
+    <div class="screenshot-modal" id="screenshot-modal">
+        <div class="screenshot-container">
+            <img id="screenshot-image" src="" alt="Screenshot">
+        </div>
+        <div class="screenshot-actions">
+            <button id="download-screenshot" class="btn btn-primary">
+                <i class="fas fa-download"></i> Download
+            </button>
+            <button id="close-screenshot" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+        <button class="screenshot-close" id="screenshot-close">×</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/PointerLockControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/objects/Water.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/objects/Sky.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplex-noise@2.4.0/simplex-noise.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="js/virtual-world.js"></script>
+</body>
+</html>

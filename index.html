@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Ethan Comtet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/skills-animation.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- En-tête -->
+    <header class="header-container">
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="glitch" data-text="ETHAN COMTET">ETHAN COMTET</h1>
+                <p class="header-subtitle">Développeur Full Stack & Passionné de 3D</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="navbar-brand">ETHAN.DEV</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="threejs/index.html">ThreeJS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main>
+        <!-- Section À propos -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="section-title">À propos</h2>
+                        <div class="about-content">
+                            <p>
+                                Développeur Full Stack passionné avec un fort intérêt pour la visualisation 3D et les expériences web interactives.
+                                Mes compétences couvrent les technologies web modernes, avec un focus particulier sur la création d'interfaces
+                                immersives alliant fonctionnalité et design innovant.
+                            </p>
+                            <p>
+                                Avec de l'expérience en développement front-end et back-end, j'aime construire des solutions complètes offrant
+                                des expériences utilisateur exceptionnelles. Je suis particulièrement enthousiaste à propos de Three.js et WebGL,
+                                qui me permettent d'intégrer des graphismes 3D et des animations sur le web.
+                            </p>
+                            <div class="skills-container">
+                                <h3>Compétences techniques</h3>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="skills-category">
+                                            <h3>Front-end</h3>
+                                            <div class="skills-grid">
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-html5"></i>
+                                                    <span>HTML5</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-css3-alt"></i>
+                                                    <span>CSS3</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-js"></i>
+                                                    <span>JavaScript</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-react"></i>
+                                                    <span>React</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-vuejs"></i>
+                                                    <span>Vue.js</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-bootstrap"></i>
+                                                    <span>Bootstrap</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="skills-category">
+                                            <h3>Back-end</h3>
+                                            <div class="skills-grid">
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-php"></i>
+                                                    <span>PHP</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-symfony"></i>
+                                                    <span>Symfony</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fas fa-database"></i>
+                                                    <span>MySQL</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-docker"></i>
+                                                    <span>Docker</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fas fa-cube"></i>
+                                                    <span>Three.js</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-angular"></i>
+                                                    <span>Angular</span>
+                                                </div>
+                                                <div class="skill-item animate__animated">
+                                                    <i class="fab fa-node-js"></i>
+                                                    <span>Node.js</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Projets -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <h2 class="section-title">Mes projets</h2>
+
+                <!-- Projet 1 - Scan Hub -->
+                <div class="row mb-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="project-card neon-hover">
+                            <div class="row g-4 align-items-center">
+                                <div class="col-lg-6 order-lg-1">
+                                    <div class="project-card-content">
+                                        <h3>Scan Hub</h3>
+                                        <p>Création d'un site pour lire des mangas et scanlations en ligne utilisant l'API de MangaDex.</p>
+                                        <div class="project-technologies">
+                                            <span class="project-technology">
+                                                <i class="fab fa-php mini-icon"></i> PHP
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fab fa-symfony mini-icon"></i> Symfony
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fas fa-database mini-icon"></i> Doctrine
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fas fa-code mini-icon"></i> Twig
+                                            </span>
+                                        </div>
+                                        <div class="project-links">
+                                            <a href="#" class="project-link">
+                                                <i class="fas fa-external-link-alt"></i> Voir plus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6 order-lg-2">
+                                    <div id="scanHubCarousel" class="carousel slide neon-carousel" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img src="img/scan-hub/1.jpg" class="d-block w-100" alt="Interface Scan Hub">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="img/scan-hub/2.jpg" class="d-block w-100" alt="Bibliothèque Scan Hub">
+                                            </div>
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#scanHubCarousel">
+                                            <span class="carousel-control-prev-icon neon-arrow"></span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#scanHubCarousel">
+                                            <span class="carousel-control-next-icon neon-arrow"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 2 - Image Manip -->
+                <div class="row mb-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="project-card neon-hover">
+                            <div class="row g-4 align-items-center">
+                                <div class="col-lg-6 order-lg-2 text-center">
+                                    <a href="imagemanip/index.html" class="btn-convertir">
+                                        <i class="fas fa-sync-alt fa-3x pulse-icon"></i>
+                                        <span class="d-block mt-3">Convertir Maintenant</span>
+                                    </a>
+                                </div>
+                                
+                                <div class="col-lg-6 order-lg-1">
+                                    <div class="project-card-content">
+                                        <h3>Image Manip</h3>
+                                        <p>Utilisation de DockerHub pour facilement et de partout convertir des images, notamment pour le format JPG en Webp/AVIF.</p>
+                                        <p>Image Docker en privé mais reproduction avec une interface visuelle ici !</p>
+                                        <div class="project-technologies">
+                                            <span class="project-technology">
+                                                <i class="fab fa-docker mini-icon"></i> Docker
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fab fa-php mini-icon"></i> PHP
+                                            </span>
+                                        </div>
+                                        <div class="project-links">
+                                            <a href="https://hub.docker.com/repository/docker/comteteth/image-converter/general" 
+                                            class="project-link">
+                                                <i class="fab fa-docker"></i> DockerHub
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 3 - Three Js -->
+                <div class="row mb-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="project-card neon-hover">
+                            <div class="row g-4 align-items-center">
+                                <div class="col-lg-6 order-lg-1">
+                                    <div class="project-card-content">
+                                        <h3>Three Js</h3>
+                                        <p>Utilisation de Three Js pour modéliser des objets 3D lors de mini-projets.</p>
+                                        <div class="project-technologies">
+                                            <span class="project-technology">
+                                                <i class="fab fa-js mini-icon"></i> JavaScript
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fas fa-cube mini-icon"></i> Three Js
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fas fa-drafting-compass mini-icon"></i> 3D
+                                            </span>
+                                        </div>
+                                        <div class="project-links">
+                                            <a href="threejs/index.html" class="project-link">
+                                                <i class="fas fa-cube"></i> Voir des démos
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6 order-lg-2 text-center">
+                                    <img src="img/threejs-logo.png" alt="Three.js Logo" class="threejs-logo">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 4 - Echec Js -->
+                <div class="row mb-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="project-card neon-hover">
+                            <div class="row g-4 align-items-center">
+                                <div class="col-lg-6">
+                                    <div id="echecCarousel" class="carousel slide neon-carousel" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img src="img/echec-js/1.jpg" class="d-block w-100" alt="Plateau d'échecs">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="img/echec-js/2.jpg" class="d-block w-100" alt="Interface multijoueur">
+                                            </div>
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#echecCarousel">
+                                            <span class="carousel-control-prev-icon neon-arrow"></span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#echecCarousel">
+                                            <span class="carousel-control-next-icon neon-arrow"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6">
+                                    <div class="project-card-content">
+                                        <h3>Echec Js</h3>
+                                        <p>Création d'un site web de jeu d'échecs multijoueur en temps réel.</p>
+                                        <div class="project-technologies">
+                                            <span class="project-technology">
+                                                <i class="fab fa-js mini-icon"></i> JavaScript
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fab fa-vuejs mini-icon"></i> Vue.js
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fas fa-code-branch mini-icon"></i> TypeScript
+                                            </span>
+                                        </div>
+                                        <div class="project-links">
+                                            <a href="#" class="project-link">
+                                                <i class="fas fa-external-link-alt"></i> Voir plus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 5 - IoT Presence -->
+                <div class="row mb-5">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="project-card neon-hover">
+                            <div class="row g-4 align-items-center">
+                                <div class="col-lg-6 order-lg-1">
+                                    <div class="project-card-content">
+                                        <h3>IoT Presence</h3>
+                                        <h5><medium class="text-muted">(En cours de développement)</medium></h5>
+                                        <p>Projet utilisant un ESP32 Light Feather pour détecter la présence et contrôler l'éclairage/porte selon la luminosité et des seuils paramétrables via le site web.</p>
+                                        <div class="project-technologies">
+                                            <span class="project-technology">
+                                                <i class="fab fa-angular mini-icon"></i> Angular
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fas fa-microchip mini-icon"></i> ESP32
+                                            </span>
+                                            <span class="project-technology">
+                                                <i class="fas fa-code mini-icon"></i> Arduino
+                                            </span>
+                                        </div>
+                                        <div class="project-links">
+                                            <a href="#" class="project-link">
+                                                <i class="fas fa-external-link-alt"></i> Voir plus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6 order-lg-2">
+                                    <div id="iotCarousel" class="carousel slide neon-carousel" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img src="img/iot-presence/1.jpg" class="d-block w-100" alt="Module ESP32">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="img/iot-presence/2.jpg" class="d-block w-100" alt="Interface IoT">
+                                            </div>
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#iotCarousel">
+                                            <span class="carousel-control-prev-icon neon-arrow"></span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#iotCarousel">
+                                            <span class="carousel-control-next-icon neon-arrow"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="contact-info">
+                            <h3>Information</h3>
+                            <p>N'hésitez pas à me contacter pour obtenir plus d'informations sur certains de mes projets, une opportunité de collaborer ou encore juste dire coucou !</p>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>comtet.pro@gmail.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>01 Ain, France</span>
+                            </div>
+                            <div class="social-links">
+                                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="contact-form">
+                            <h3>Envoyer un message</h3>
+                            <p class="form-instruction">(Pour m'envoyer un message, utilisez votre boîte mail, merci)</p>
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <label for="name">Nom</label>
+                                    <input type="text" id="name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" class="form-control" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Envoyer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Navigation</h5>
+                    <p><a href="#about">À propos</a></p>
+                    <p><a href="#projects">Projets</a></p>
+                    <p><a href="threejs/index.html">ThreeJS</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Ressources</h5>
+                    <p><a href="https://threejs.org/" target="_blank">Three.js Officiel</a></p>
+                    <p><a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js GitHub</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Informations légales</h5>
+                    <p>© 2025 Ethan Comtet</p>
+                    <p>All rights reserved</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Conçu en vitesse par Ethan Comtet pour être noté</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/desktop-optimization.js"></script>
+    <script src="js/test.js"></script>
+</body>
+</html>

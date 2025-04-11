@@ -1,0 +1,390 @@
+/* Demo 3 - 3D Model Viewer Styles */
+.demo-container {
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.demo-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 255, 255, 0.1) 0%, rgba(13, 13, 13, 0) 70%);
+    z-index: 0;
+}
+
+.canvas-container {
+    width: 100%;
+    height: 500px;
+    background-color: rgba(13, 13, 13, 0.7);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.canvas-container:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.model-selector {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.model-option {
+    flex: 1;
+    background-color: rgba(13, 13, 13, 0.7);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.model-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.model-option.active {
+    border: 1px solid var(--primary-neon);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+.model-thumbnail {
+    width: 100%;
+    height: 80px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.model-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-thumbnail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary-neon);
+}
+
+.model-option span {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--primary-neon);
+}
+
+.controls-panel {
+    background-color: rgba(13, 13, 13, 0.7);
+    border-radius: 10px;
+    padding: 2rem;
+    height: 600px;
+    overflow-y: auto;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-neon) rgba(13, 13, 13, 0.5);
+}
+
+.controls-panel:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.controls-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.controls-panel::-webkit-scrollbar-track {
+    background: rgba(13, 13, 13, 0.5);
+    border-radius: 10px;
+}
+
+.controls-panel::-webkit-scrollbar-thumb {
+    background-color: var(--primary-neon);
+    border-radius: 10px;
+    border: 2px solid rgba(13, 13, 13, 0.5);
+}
+
+.panel-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.panel-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.panel-section h3 {
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.panel-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--primary-neon);
+    box-shadow: 0 0 5px var(--primary-neon);
+    transition: all 0.3s ease;
+}
+
+.panel-section:hover h3::after {
+    width: 100%;
+}
+
+.control-group {
+    margin-bottom: 1.5rem;
+}
+
+.control-group:last-child {
+    margin-bottom: 0;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.neon-select,
+.neon-slider,
+.neon-color,
+.neon-switch {
+    border: 1px solid var(--primary-neon);
+    background-color: rgba(13, 13, 13, 0.7);
+    color: var(--primary-neon);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.neon-select {
+    padding: 0.5rem;
+    width: 100%;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
+}
+
+.neon-select:focus {
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    border-color: var(--primary-neon);
+}
+
+.neon-select option {
+    background-color: #0d0d0d;
+    color: var(--primary-neon);
+}
+
+.neon-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: rgba(0, 255, 255, 0.2);
+    outline: none;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.neon-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--primary-neon);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.neon-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--primary-neon);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    transition: all 0.3s ease;
+}
+
+.neon-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 1);
+}
+
+.neon-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 1);
+}
+
+.neon-color {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.neon-color::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.neon-color::-webkit-color-swatch {
+    border: 2px solid var(--primary-neon);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.neon-switch {
+    width: 40px;
+    height: 20px;
+    background-color: rgba(13, 13, 13, 0.7);
+    border-radius: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.neon-switch:checked {
+    background-color: var(--primary-neon);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.demo-info {
+    background-color: rgba(13, 13, 13, 0.7);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.demo-info:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.demo-info h2 {
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.demo-info h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--primary-neon);
+    box-shadow: 0 0 5px var(--primary-neon);
+    transition: all 0.3s ease;
+}
+
+.demo-info:hover h2::after {
+    width: 100%;
+}
+
+.demo-info p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.demo-info ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.demo-info ul li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.demo-info ul li::before {
+    content: '•';
+    color: var(--primary-neon);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    text-shadow: 0 0 5px var(--primary-neon);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .canvas-container {
+        height: 400px;
+    }
+    
+    .controls-panel {
+        height: auto;
+        max-height: 500px;
+        margin-top: 2rem;
+    }
+    
+    .model-selector {
+        flex-wrap: wrap;
+    }
+    
+    .model-option {
+        flex-basis: calc(50% - 0.5rem);
+        flex-grow: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .canvas-container {
+        height: 350px;
+    }
+}
+
+@media (max-width: 576px) {
+    .canvas-container {
+        height: 300px;
+    }
+    
+    .model-option {
+        flex-basis: 100%;
+    }
+    
+    .panel-section {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .control-group {
+        margin-bottom: 1rem;
+    }
+}

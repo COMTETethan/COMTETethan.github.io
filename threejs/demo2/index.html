@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particle System | ThreeJS Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="css/demo2.css">
+    <!-- Preload audio files -->
+    <link rel="preload" href="../../audio/hover.mp3" as="audio">
+    <link rel="preload" href="../../audio/click.mp3" as="audio">
+    <link rel="preload" href="../../audio/success.mp3" as="audio">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Header -->
+    <header class="header-container">
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="glitch" data-text="Particle System">Particle System</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../index.html" class="navbar-brand">ETHAN.DEV</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html">ThreeJS Demos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../demo1/index.html">Previous Demo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../demo3/index.html">Next Demo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="demo-container">
+        <div class="container">
+            <div class="row">
+                <!-- 3D Canvas -->
+                <div class="col-lg-8">
+                    <div class="canvas-container" id="canvas-container"></div>
+                </div>
+                
+                <!-- Controls Panel -->
+                <div class="col-lg-4">
+                    <div class="controls-panel">
+                        <div class="panel-section">
+                            <h3>Particles</h3>
+                            <div class="control-group">
+                                <label for="particle-count-slider">Particle Count</label>
+                                <input type="range" id="particle-count-slider" class="form-range neon-slider" min="1000" max="10000" step="500" value="5000">
+                                <span id="particle-count-value">5000</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="particle-size-slider">Particle Size</label>
+                                <input type="range" id="particle-size-slider" class="form-range neon-slider" min="0.05" max="0.5" step="0.01" value="0.1">
+                                <span id="particle-size-value">0.1</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="particle-opacity-slider">Opacity</label>
+                                <input type="range" id="particle-opacity-slider" class="form-range neon-slider" min="0.1" max="1" step="0.05" value="0.8">
+                                <span id="particle-opacity-value">0.8</span>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Colors</h3>
+                            <div class="control-group">
+                                <label for="color-mode">Color Mode</label>
+                                <select id="color-mode" class="form-control neon-select">
+                                    <option value="rainbow">Rainbow</option>
+                                    <option value="gradient">Gradient</option>
+                                    <option value="single">Single Color</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group color-pickers">
+                                <div class="color-picker-container">
+                                    <label for="color-1">Color 1</label>
+                                    <input type="color" id="color-1" class="form-control neon-color" value="#00ffff">
+                                </div>
+                                <div class="color-picker-container">
+                                    <label for="color-2">Color 2</label>
+                                    <input type="color" id="color-2" class="form-control neon-color" value="#ff00ff">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Physics</h3>
+                            <div class="control-group">
+                                <label for="simulation-type">Simulation Type</label>
+                                <select id="simulation-type" class="form-control neon-select">
+                                    <option value="swarm">Swarm</option>
+                                    <option value="galaxy">Galaxy</option>
+                                    <option value="fountain">Fountain</option>
+                                    <option value="wave">Wave</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="speed-slider">Speed</label>
+                                <input type="range" id="speed-slider" class="form-range neon-slider" min="0.1" max="3" step="0.1" value="1">
+                                <span id="speed-value">1.0</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="turbulence-slider">Turbulence</label>
+                                <input type="range" id="turbulence-slider" class="form-range neon-slider" min="0" max="1" step="0.05" value="0.2">
+                                <span id="turbulence-value">0.2</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="mouse-interaction" checked>
+                                    <label class="form-check-label" for="mouse-interaction">Mouse Interaction</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Environment</h3>
+                            <div class="control-group">
+                                <label for="background-color-picker">Background</label>
+                                <input type="color" id="background-color-picker" class="form-control neon-color" value="#0d0d0d">
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="show-trails" checked>
+                                    <label class="form-check-label" for="show-trails">Particle Trails</label>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <button id="reset-button" class="btn btn-primary">Reset All</button>
+                                <button id="screenshot-button" class="btn btn-secondary">Take Screenshot</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="demo-info">
+                        <h2>About This Demo</h2>
+                        <p>
+                            This interactive Particle System demonstrates advanced particle physics and rendering techniques using Three.js. 
+                            The demo allows you to control thousands of particles in real-time, creating mesmerizing visual effects through 
+                            various simulation types and interactive controls.
+                        </p>
+                        <p>
+                            Key features of this particle system include:
+                        </p>
+                        <ul>
+                            <li>Dynamic particle generation with adjustable count and properties</li>
+                            <li>Multiple simulation types with unique physics behaviors</li>
+                            <li>Real-time color manipulation with gradient and rainbow options</li>
+                            <li>Interactive mouse controls that influence particle movement</li>
+                            <li>Particle trails for enhanced visual effects</li>
+                        </ul>
+                        <p>
+                            Experiment with different settings to create unique particle effects. Try changing the simulation type, 
+                            adjusting the particle count, or enabling mouse interaction to see how the particles respond to your movements.
+                        </p>
+                        <p>
+                            This demo showcases the power of GPU-accelerated particle systems in web browsers, demonstrating how 
+                            modern web technologies can create complex visual simulations that were once only possible in native applications.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Navigation</h5>
+                    <p><a href="../../index.html">Home</a></p>
+                    <p><a href="../index.html">ThreeJS Demos</a></p>
+                    <p><a href="../demo1/index.html">Previous Demo</a></p>
+                    <p><a href="../demo3/index.html">Next Demo</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <p><a href="https://threejs.org/" target="_blank">Three.js Official</a></p>
+                    <p><a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js GitHub</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Legal Information</h5>
+                    <p>© 2025 Ethan Comtet</p>
+                    <p>All rights reserved</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Designed with <i class="fas fa-heart" style="color: var(--secondary-neon);"></i> by Ethan Comtet</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="js/demo2.js"></script>
+</body>
+</html>

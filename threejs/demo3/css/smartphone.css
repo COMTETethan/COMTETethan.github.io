@@ -1,0 +1,436 @@
+.demo-container {
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Canvas Container */
+.canvas-container {
+    width: 100%;
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.canvas-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* Model Actions */
+.model-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: center;
+}
+
+.model-actions button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+}
+
+.model-actions button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+}
+
+.model-actions button:hover::before {
+    left: 100%;
+}
+
+.model-actions button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.model-actions button i {
+    margin-right: 0.5rem;
+}
+
+.btn-secondary {
+    background: linear-gradient(90deg, #444, #666);
+    color: white;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--primary-neon), #0077cc);
+    color: black;
+}
+
+.btn-info {
+    background: linear-gradient(90deg, #00ccff, #0099ff);
+    color: black;
+}
+
+.btn-success {
+    background: linear-gradient(90deg, var(--tertiary-neon), #00cc66);
+    color: black;
+}
+
+/* Controls Panel */
+.controls-panel {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    height: 100%;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    overflow-y: auto;
+    max-height: 600px;
+}
+
+.panel-section {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.panel-section:last-child {
+    margin-bottom: 0;
+}
+
+.panel-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-neon);
+    position: relative;
+    display: inline-block;
+}
+
+.panel-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-neon), transparent);
+}
+
+.control-group {
+    margin-bottom: 1.5rem;
+}
+
+.control-group:last-child {
+    margin-bottom: 0;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+/* Neon Form Controls */
+.neon-color {
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.neon-select {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: var(--text-light);
+    padding: 0.75rem;
+    border-radius: 5px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.neon-select:focus {
+    border-color: var(--primary-neon);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    outline: none;
+}
+
+.neon-slider {
+    height: 5px;
+    background-color: rgba(0, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
+.neon-slider::-webkit-slider-thumb {
+    background-color: var(--primary-neon);
+    box-shadow: 0 0 10px var(--primary-neon);
+}
+
+.neon-slider::-moz-range-thumb {
+    background-color: var(--primary-neon);
+    box-shadow: 0 0 10px var(--primary-neon);
+}
+
+.neon-switch {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.neon-switch:checked {
+    background-color: var(--primary-neon);
+    border-color: var(--primary-neon);
+}
+
+/* Demo Info */
+.demo-info {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 3rem;
+    margin-top: 3rem;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    position: relative;
+}
+
+.demo-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 0;
+    border-radius: 15px;
+}
+
+.demo-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+    position: relative;
+}
+
+.demo-info p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.demo-info ul {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.demo-info ul li {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.demo-info ul li::marker {
+    color: var(--primary-neon);
+}
+
+/* Screenshot Modal */
+.screenshot-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.screenshot-modal.active {
+    display: flex;
+}
+
+.screenshot-container {
+    max-width: 80%;
+    max-height: 80%;
+    position: relative;
+    border: 2px solid var(--primary-neon);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+}
+
+.screenshot-container img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.screenshot-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.screenshot-actions button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.screenshot-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.screenshot-close:hover {
+    color: var(--primary-neon);
+    transform: rotate(90deg);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .controls-panel {
+        margin-top: 2rem;
+        max-height: none;
+    }
+    
+    .canvas-container {
+        height: 500px;
+    }
+    
+    .model-actions {
+        flex-direction: row;
+    }
+    
+    .model-actions button {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .demo-container {
+        padding: 2rem 0;
+    }
+    
+    .canvas-container {
+        height: 400px;
+    }
+    
+    .model-actions {
+        flex-wrap: wrap;
+    }
+    
+    .model-actions button {
+        flex: 1 0 calc(50% - 0.5rem);
+    }
+    
+    .demo-info {
+        padding: 2rem;
+    }
+    
+    .demo-info h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .canvas-container {
+        height: 300px;
+    }
+    
+    .model-actions button {
+        flex: 1 0 100%;
+    }
+    
+    .panel-section h3 {
+        font-size: 1.3rem;
+    }
+    
+    .demo-info {
+        padding: 1.5rem;
+    }
+    
+    .demo-info h2 {
+        font-size: 1.8rem;
+    }
+    
+    .demo-info p, .demo-info ul li {
+        font-size: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.panel-section {
+    animation: float 6s ease-in-out infinite;
+}
+
+.panel-section:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.panel-section:nth-child(2) {
+    animation-delay: 1.5s;
+}
+
+.panel-section:nth-child(3) {
+    animation-delay: 3s;
+}
+
+.panel-section:nth-child(4) {
+    animation-delay: 4.5s;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
+}
+
+.canvas-container {
+    animation: glow 4s ease-in-out infinite;
+}

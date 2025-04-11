@@ -1,0 +1,35 @@
+/* Fix for control panel interactivity */
+.controls-panel {
+    position: relative;
+    z-index: 10;
+}
+
+.controls-panel input,
+.controls-panel select,
+.controls-panel button,
+.controls-panel .form-check-input,
+.controls-panel .form-check-label {
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+}
+
+.panel-section {
+    position: relative;
+    z-index: 10;
+}
+
+.control-group {
+    position: relative;
+    z-index: 15;
+}
+
+/* Ensure custom cursor doesn't interfere with controls */
+.custom-cursor {
+    pointer-events: none;
+}
+
+/* Ensure any overlays don't block interaction */
+.demo-container::before {
+    pointer-events: none;
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorateur Géométrique 3D | Démo ThreeJS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="css/demo1.css">
+</head>
+<body>
+    <!-- Écran de chargement -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Curseur personnalisé -->
+    <div class="custom-cursor"></div>
+
+    <!-- En-tête -->
+    <header class="header-container">
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="glitch" data-text="Explorateur Géométrique 3D">Explorateur Géométrique 3D</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../index.html" class="navbar-brand">ETHAN.DEV</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Démos ThreeJS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../demo2/index.html">Démo Suivante</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenu principal -->
+    <main class="demo-container">
+        <div class="container">
+            <div class="row">
+                <!-- Canvas 3D -->
+                <div class="col-lg-8">
+                    <div class="canvas-container" id="canvas-container"></div>
+                </div>
+                
+                <!-- Panneau de contrôle -->
+                <div class="col-lg-4">
+                    <div class="controls-panel">
+                        <div class="panel-section">
+                            <h3>Géométrie</h3>
+                            <div class="control-group">
+                                <label for="geometry-type">Type de forme</label>
+                                <select id="geometry-type" class="form-control neon-select">
+                                    <option value="box">Cube</option>
+                                    <option value="plane">Rectangle</option>
+                                    <option value="triangle">Triangle</option>
+                                    <option value="sphere">Sphère</option>
+                                    <option value="cone">Cône</option>
+                                    <option value="cylinder">Cylindre</option>
+                                    <option value="torus">Tore</option>
+                                    <option value="torusKnot">Nœud torique</option>
+                                    <option value="icosahedron">Icosaèdre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="size-slider">Taille</label>
+                                <input type="range" id="size-slider" class="form-range neon-slider" min="0.5" max="3" step="0.1" value="1">
+                                <span id="size-value">1.0</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="detail-slider">Niveau de détail</label>
+                                <input type="range" id="detail-slider" class="form-range neon-slider" min="8" max="64" step="4" value="32">
+                                <span id="detail-value">32</span>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Matériau</h3>
+                            <div class="control-group">
+                                <label for="material-type">Type de matériau</label>
+                                <select id="material-type" class="form-control neon-select">
+                                    <option value="standard">Standard</option>
+                                    <option value="physical">Physique</option>
+                                    <option value="phong">Phong</option>
+                                    <option value="basic">Basique</option>
+                                    <option value="wireframe">Fil de fer</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="color-picker">Couleur</label>
+                                <input type="color" id="color-picker" class="form-control neon-color" value="#00ffff">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="metalness-slider">Métallicité</label>
+                                <input type="range" id="metalness-slider" class="form-range neon-slider" min="0" max="1" step="0.01" value="0.5">
+                                <span id="metalness-value">0.5</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="roughness-slider">Rugosité</label>
+                                <input type="range" id="roughness-slider" class="form-range neon-slider" min="0" max="1" step="0.01" value="0.2">
+                                <span id="roughness-value">0.2</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="emissive-intensity-slider">Intensité lumineuse</label>
+                                <input type="range" id="emissive-intensity-slider" class="form-range neon-slider" min="0" max="1" step="0.01" value="0.3">
+                                <span id="emissive-intensity-value">0.3</span>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Animation</h3>
+                            <div class="control-group">
+                                <label for="rotation-speed-slider">Vitesse de rotation</label>
+                                <input type="range" id="rotation-speed-slider" class="form-range neon-slider" min="0" max="0.1" step="0.001" value="0.01">
+                                <span id="rotation-speed-value">0.01</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="auto-rotate" checked>
+                                    <label class="form-check-label" for="auto-rotate">Rotation automatique</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Environnement</h3>
+                            <div class="control-group">
+                                <label for="background-color-picker">Arrière-plan</label>
+                                <input type="color" id="background-color-picker" class="form-control neon-color" value="#0d0d0d">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="light-intensity-slider">Intensité lumineuse</label>
+                                <input type="range" id="light-intensity-slider" class="form-range neon-slider" min="0" max="3" step="0.1" value="1">
+                                <span id="light-intensity-value">1.0</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <button id="reset-button" class="btn btn-primary">Réinitialiser</button>
+                                <button id="screenshot-button" class="btn btn-secondary">Capturer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="demo-info">
+                        <h2>À propos de cette démo</h2>
+                        <p>
+                            Cet explorateur géométrique 3D interactif démontre la puissance de Three.js pour créer et manipuler des objets 3D en temps réel. 
+                            Expérimentez avec différentes formes géométriques, matériaux, couleurs et animations pour explorer les capacités du rendu 3D dans le navigateur.
+                        </p>
+                        <p>
+                            Cette démo met en avant plusieurs fonctionnalités clés de Three.js :
+                        </p>
+                        <ul>
+                            <li>Création et modification dynamique de géométries</li>
+                            <li>Matériaux PBR (Rendu Physiquement Réaliste) avec propriétés avancées</li>
+                            <li>Éclairage et ombres en temps réel</li>
+                            <li>Contrôles de caméra (rotation, déplacement, zoom)</li>
+                            <li>Effets visuels et post-traitement personnalisés</li>
+                        </ul>
+                        <p>
+                            Utilisez le panneau de contrôle pour personnaliser chaque aspect de l'objet 3D et de son environnement. Vous pouvez :
+                        </p>
+                        <ul>
+                            <li>Changer la forme géométrique</li>
+                            <li>Ajuster la taille et le niveau de détail</li>
+                            <li>Modifier les propriétés des matériaux</li>
+                            <li>Contrôler les animations et l'éclairage</li>
+                            <li>Capturer des images de vos créations</li>
+                        </ul>
+                        <p>
+                            Cette démo fait partie d'une série présentant différentes capacités de Three.js. N'hésitez pas à explorer les autres démonstrations !
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Navigation</h5>
+                    <p><a href="../../index.html">Accueil</a></p>
+                    <p><a href="../index.html">Démos ThreeJS</a></p>
+                    <p><a href="../demo2/index.html">Démo Suivante</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Ressources</h5>
+                    <p><a href="https://threejs.org/" target="_blank">Site officiel Three.js</a></p>
+                    <p><a href="https://github.com/mrdoob/three.js/" target="_blank">GitHub Three.js</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Informations légales</h5>
+                    <p>© 2025 Ethan Comtet</p>
+                    <p>Tous droits réservés</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Conçu avec <i class="fas fa-heart" style="color: var(--secondary-neon);"></i> par Ethan Comtet</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="js/demo1.js"></script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+/* Project Carousel Styles */
+.project-section {
+    margin-bottom: 6rem;
+    padding: 2rem;
+    border-radius: 15px;
+    background-color: rgba(13, 13, 13, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: 0;
+}
+
+.project-section:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.project-section h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.project-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-neon), transparent);
+    box-shadow: 0 0 10px var(--primary-neon);
+}
+
+.project-description {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+}
+
+.project-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.project-technology {
+    background-color: rgba(0, 255, 255, 0.1);
+    color: var(--primary-neon);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.project-technology:hover {
+    background-color: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-neon);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    background-color: rgba(0, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.project-link:hover {
+    background-color: rgba(0, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.project-link i {
+    font-size: 1.2rem;
+}
+
+/* Carousel Styles */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    margin-bottom: 2rem;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 400px;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carousel-slide:hover img {
+    transform: scale(1.05);
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    pointer-events: none;
+}
+
+.carousel-control {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--primary-neon);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+.carousel-indicator.active {
+    background-color: var(--primary-neon);
+    box-shadow: 0 0 10px var(--primary-neon);
+    transform: scale(1.2);
+}
+
+.carousel-indicator:hover {
+    background-color: rgba(0, 255, 255, 0.8);
+    box-shadow: 0 0 5px var(--primary-neon);
+}
+
+/* ThreeJS Demo Button */
+.demo-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--secondary-neon);
+    color: var(--background-dark);
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.demo-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.6s ease;
+}
+
+.demo-button:hover::before {
+    left: 100%;
+}
+
+.demo-button:hover {
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
+    transform: translateY(-3px) scale(1.05);
+}
+
+.demo-button i {
+    font-size: 1.2rem;
+}
+
+/* Animation for project sections */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-section {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+}
+
+.project-section:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.project-section:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.project-section:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.project-section:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+.project-section:nth-child(5) {
+    animation-delay: 0.9s;
+}
+
+/* Floating animation for carousel */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.carousel-container {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Glow pulse animation for indicators */
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+    }
+}
+
+.carousel-indicator.active {
+    animation: glowPulse 2s infinite;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .carousel {
+        height: 300px;
+    }
+    
+    .project-section h3 {
+        font-size: 1.8rem;
+    }
+    
+    .project-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel {
+        height: 250px;
+    }
+    
+    .carousel-control {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .project-section h3 {
+        font-size: 1.5rem;
+    }
+    
+    .project-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

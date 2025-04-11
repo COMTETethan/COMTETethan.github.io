@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Smartphone | ThreeJS Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/fix-controls.css">
+    <link rel="stylesheet" href="css/smartphone.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Header -->
+    <header class="header-container">
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="text-center">
+                <h1 class="glitch" data-text="3D Smartphone">3D Smartphone</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav-container">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../index.html" class="navbar-brand">ETHAN.DEV</a>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.html">ThreeJS Demos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../demo2/index.html">Previous Demo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../demo4/index.html">Next Demo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="demo-container">
+        <div class="container">
+            <div class="row">
+                <!-- 3D Canvas -->
+                <div class="col-lg-8">
+                    <div class="canvas-container" id="canvas-container"></div>
+                    <div class="model-actions">
+                        <button id="toggle-wireframe" class="btn btn-secondary">
+                            <i class="fas fa-vector-square"></i> Toggle Wireframe
+                        </button>
+                        <button id="toggle-explode" class="btn btn-primary">
+                            <i class="fas fa-bomb"></i> Explode View
+                        </button>
+                        <button id="toggle-animation" class="btn btn-info">
+                            <i class="fas fa-play"></i> Toggle Animation
+                        </button>
+                        <button id="screenshot-button" class="btn btn-success">
+                            <i class="fas fa-camera"></i> Take Screenshot
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Controls Panel -->
+                <div class="col-lg-4">
+                    <div class="controls-panel">
+                        <div class="panel-section">
+                            <h3>Phone Design</h3>
+                            <div class="control-group">
+                                <label for="phone-color">Phone Color</label>
+                                <input type="color" id="phone-color" class="form-control neon-color" value="#333333">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="screen-color">Screen Color</label>
+                                <input type="color" id="screen-color" class="form-control neon-color" value="#0088ff">
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="phone-model">Phone Model</label>
+                                <select id="phone-model" class="form-control neon-select">
+                                    <option value="modern">Modern Smartphone</option>
+                                    <option value="classic">Classic Phone</option>
+                                    <option value="futuristic">Futuristic Device</option>
+                                    <option value="tablet">Tablet</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="show-screen" checked>
+                                    <label class="form-check-label" for="show-screen">Screen On</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Materials</h3>
+                            <div class="control-group">
+                                <label for="material-type">Material Type</label>
+                                <select id="material-type" class="form-control neon-select">
+                                    <option value="standard">Standard</option>
+                                    <option value="physical">Physical</option>
+                                    <option value="toon">Toon</option>
+                                    <option value="glossy">Glossy</option>
+                                    <option value="matte">Matte</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="metalness-slider">Metalness</label>
+                                <input type="range" id="metalness-slider" class="form-range neon-slider" min="0" max="1" step="0.05" value="0.5">
+                                <span id="metalness-value">0.5</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="roughness-slider">Roughness</label>
+                                <input type="range" id="roughness-slider" class="form-range neon-slider" min="0" max="1" step="0.05" value="0.2">
+                                <span id="roughness-value">0.2</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="show-reflections" checked>
+                                    <label class="form-check-label" for="show-reflections">Reflections</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Environment</h3>
+                            <div class="control-group">
+                                <label for="environment-type">Environment</label>
+                                <select id="environment-type" class="form-control neon-select">
+                                    <option value="studio">Studio</option>
+                                    <option value="outdoor">Outdoor</option>
+                                    <option value="night">Night</option>
+                                    <option value="abstract">Abstract</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <label for="light-intensity-slider">Light Intensity</label>
+                                <input type="range" id="light-intensity-slider" class="form-range neon-slider" min="0" max="2" step="0.1" value="1">
+                                <span id="light-intensity-value">1.0</span>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="show-shadows" checked>
+                                    <label class="form-check-label" for="show-shadows">Shadows</label>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="show-glow">
+                                    <label class="form-check-label" for="show-glow">Screen Glow</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel-section">
+                            <h3>Camera</h3>
+                            <div class="control-group">
+                                <label for="camera-position">Camera Position</label>
+                                <select id="camera-position" class="form-control neon-select">
+                                    <option value="front">Front View</option>
+                                    <option value="side">Side View</option>
+                                    <option value="angled">Angled View</option>
+                                    <option value="top">Top View</option>
+                                </select>
+                            </div>
+                            
+                            <div class="control-group">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input neon-switch" type="checkbox" id="auto-rotate" checked>
+                                    <label class="form-check-label" for="auto-rotate">Auto Rotate</label>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                                <button id="reset-button" class="btn btn-primary">Reset All</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="demo-info">
+                        <h2>About This Demo</h2>
+                        <p>
+                            This interactive 3D Smartphone demo showcases the capabilities of Three.js for creating and 
+                            manipulating realistic 3D models. The demo features a detailed smartphone model with customizable 
+                            properties, materials, and environment settings.
+                        </p>
+                        <p>
+                            Key features of this smartphone model viewer include:
+                        </p>
+                        <ul>
+                            <li>Realistic 3D smartphone model with detailed components</li>
+                            <li>Customizable colors, materials, and reflections</li>
+                            <li>Interactive "explode view" to see internal components</li>
+                            <li>Multiple environment and lighting options</li>
+                            <li>Camera controls for viewing from different angles</li>
+                            <li>Screenshot capability to save your custom designs</li>
+                        </ul>
+                        <p>
+                            This demo demonstrates advanced Three.js techniques including:
+                        </p>
+                        <ul>
+                            <li>Procedural 3D model generation</li>
+                            <li>PBR (Physically Based Rendering) materials</li>
+                            <li>Dynamic lighting and shadows</li>
+                            <li>Post-processing effects</li>
+                            <li>Interactive animations and transitions</li>
+                        </ul>
+                        <p>
+                            Use the controls panel to customize the smartphone and explore different visual styles and 
+                            configurations. You can also interact directly with the 3D model by clicking and dragging to 
+                            rotate, scrolling to zoom, and right-clicking to pan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Navigation</h5>
+                    <p><a href="../../index.html">Home</a></p>
+                    <p><a href="../index.html">ThreeJS Demos</a></p>
+                    <p><a href="../../index.html#projects">Projects</a></p>
+                    <p><a href="../../index.html#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <p><a href="https://threejs.org/" target="_blank">Three.js Official</a></p>
+                    <p><a href="https://github.com/mrdoob/three.js/" target="_blank">Three.js GitHub</a></p>
+                </div>
+                <div class="footer-section">
+                    <h5>Legal Information</h5>
+                    <p>© 2025 Ethan Comtet</p>
+                    <p>All rights reserved</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Designed with <i class="fas fa-heart" style="color: var(--secondary-neon);"></i> by Ethan Comtet</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="../../js/main.js"></script>
+    <script src="js/smartphone.js"></script>
+</body>
+</html>

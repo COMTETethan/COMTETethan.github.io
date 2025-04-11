@@ -286,15 +286,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     async function createSwordModel() {
-        return loadGLBModel('./demo3/models/elucidator_sword_art_online.glb');
+        return loadGLBModel('./models/elucidator_sword_art_online.glb');
     }
     
     async function createWellModel() {
-        return loadGLBModel('./demo3/models/the_village_well.glb');
+        return loadGLBModel('./models/the_village_well.glb');
     }
     
     async function createSpaceshipModel() {
-        return loadGLBModel('./demo3/models/spaceship_low_poly.glb');
+        return loadGLBModel('./models/spaceship_low_poly.glb');
     }
 
     async function loadGLBModel(path) {

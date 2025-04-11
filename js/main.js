@@ -144,49 +144,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.addEventListener('mousedown', () => {
             cursor.classList.add('active');
-            playSound('click');
         });
         
         document.addEventListener('mouseup', () => {
             cursor.classList.remove('active');
         });
     }
-
-    // Sound effects
-    const sounds = {
-        hover: new Audio('audio/hover.mp3'),
-        click: new Audio('audio/click.mp3'),
-        success: new Audio('audio/success.mp3')
-    };
-
-    // Preload sounds
-    for (const sound in sounds) {
-        sounds[sound].load();
-        sounds[sound].volume = 0.2; // Set volume to 20%
-    }
-
-    // Function to play sound
-    function playSound(soundName) {
-        if (sounds[soundName]) {
-            // Create a clone to allow overlapping sounds
-            const soundClone = sounds[soundName].cloneNode();
-            soundClone.volume = 0.2;
-            soundClone.play().catch(e => console.log("Audio play failed:", e));
-        }
-    }
-
-    // Add hover sound to interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .nav-link, .tech-button');
     
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            playSound('hover');
-        });
-        
-        element.addEventListener('click', () => {
-            playSound('click');
-        });
-    });
 
     // Sticky navigation
     const navContainer = document.querySelector('.nav-container');
@@ -201,26 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mobile navigation toggle
-    const hamburger = document.getElementById('hamburger');
-    const navList = document.getElementById('nav-list');
-    
-    if (hamburger && navList) {
-        hamburger.addEventListener('click', () => {
-            navList.classList.toggle('active');
-            playSound('click');
-        });
-        
-        // Close mobile menu when clicking on a link
-        const navLinks = navList.querySelectorAll('.nav-link');
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navList.classList.remove('active');
-                playSound('success');
-            });
-        });
-    }
 
     // Smooth scrolling for anchor links (only for links that start with # and are not just #)
     document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
@@ -236,10 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     behavior: 'smooth'
                 });
                 
-                // Play success sound when reaching the target
-                setTimeout(() => {
-                    playSound('success');
-                }, 500);
             }
         });
     });
@@ -282,15 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
             section.style.transform = '';
             section.style.boxShadow = '';
             section.style.border = '';
-        });
-    });
-
-    // ThreeJS card hover effects
-    const threejsCards = document.querySelectorAll('.threejs-card');
-    
-    threejsCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            playSound('hover');
         });
     });
 

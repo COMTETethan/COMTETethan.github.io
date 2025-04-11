@@ -345,3 +345,13 @@
 .btn-primary:hover {
     background-color: rgba(0, 255, 255, 0.2);
 }
+
+.canvas-container { 
+    z-index: 1;
+    position: relative;
+  }
+  
+  .controls-panel {
+    z-index: 2;
+    position: relative;
+  }

@@ -216,7 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentObject.receiveShadow = true;
         scene.add(currentObject);
         
-        playSound('success');
     }
     
     function animate() {
@@ -242,7 +241,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('geometry-type').addEventListener('change', function(e) {
             settings.geometry.type = e.target.value;
             createObject();
-            playSound('click');
         });
         
         document.getElementById('size-slider').addEventListener('input', function(e) {
@@ -260,7 +258,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('material-type').addEventListener('change', function(e) {
             settings.material.type = e.target.value;
             createObject();
-            playSound('click');
         });
         
         document.getElementById('color-picker').addEventListener('input', function(e) {
@@ -302,7 +299,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.getElementById('auto-rotate').addEventListener('change', function(e) {
             settings.animation.autoRotate = e.target.checked;
-            playSound('click');
         });
         
         document.getElementById('background-color-picker').addEventListener('input', function(e) {
@@ -354,7 +350,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateLightIntensity();
             createObject();
             
-            playSound('success');
         });
         
         document.getElementById('screenshot-button').addEventListener('click', function() {
@@ -367,16 +362,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link.download = 'geometry-explorer-screenshot.png';
             link.click();
             
-            playSound('success');
         });
-    }
-    
-    function playSound(soundName) {
-        if (window.sounds && window.sounds[soundName]) {
-            const soundClone = window.sounds[soundName].cloneNode();
-            soundClone.volume = 0.2;
-            soundClone.play().catch(e => console.log("Audio play failed:", e));
-        }
     }
     
     init();

@@ -456,8 +456,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Hide loading spinner
         document.querySelector('.loading').style.display = 'none';
         
-        // Play sound effect
-        playSound('success');
     }
     
     // Generate mountain height
@@ -662,7 +660,6 @@ document.addEventListener('DOMContentLoaded', function() {
             terrain.material.wireframe = isWireframe;
         }
         
-        playSound('click');
     }
     
     // Toggle fly mode
@@ -698,7 +695,6 @@ document.addEventListener('DOMContentLoaded', function() {
             controls.target.set(0, 0, 0);
         }
         
-        playSound('click');
     }
     
     // Animation loop
@@ -773,19 +769,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Terrain Type
         document.getElementById('terrain-type').addEventListener('change', function(e) {
             settings.terrain.type = e.target.value;
-            playSound('click');
         });
         
         // Material Type
         document.getElementById('material-type').addEventListener('change', function(e) {
             settings.materials.type = e.target.value;
-            playSound('click');
         });
         
         // Use Vertex Colors Toggle
         document.getElementById('use-vertex-colors').addEventListener('change', function(e) {
             settings.materials.useVertexColors = e.target.checked;
-            playSound('click');
         });
         
         // Low Color Picker
@@ -802,7 +795,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('sky-type').addEventListener('change', function(e) {
             settings.environment.skyType = e.target.value;
             updateSky();
-            playSound('click');
         });
         
         // Light Intensity Slider
@@ -838,7 +830,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 water.material.fog = settings.environment.showFog;
             }
             
-            playSound('click');
         });
         
         // Show Particles Toggle
@@ -852,7 +843,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 particles = null;
             }
             
-            playSound('click');
         });
         
         // Water Level Slider
@@ -918,7 +908,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.textContent = 'Add Water';
             }
             
-            playSound('click');
         });
         
         // Toggle Fly Mode Button
@@ -946,18 +935,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link.download = 'terrain-screenshot.png';
             link.click();
             
-            playSound('success');
         });
-    }
-    
-    // Sound effects
-    function playSound(soundName) {
-        // Check if window.sounds exists (from main.js)
-        if (window.sounds && window.sounds[soundName]) {
-            const soundClone = window.sounds[soundName].cloneNode();
-            soundClone.volume = 0.2;
-            soundClone.play().catch(e => console.log("Audio play failed:", e));
-        }
     }
     
     // Initialize the scene

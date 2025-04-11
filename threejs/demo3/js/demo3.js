@@ -229,7 +229,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     scene.add(currentModel);
                     updateMaterials();
                     document.querySelector('.loading').style.display = 'none';
-                    playSound('success');
                 });
                 break;
                 
@@ -240,7 +239,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     scene.add(currentModel);
                     updateMaterials();
                     document.querySelector('.loading').style.display = 'none';
-                    playSound('success');
                 });
                 break;
                 
@@ -251,7 +249,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     scene.add(currentModel);
                     updateMaterials();
                     document.querySelector('.loading').style.display = 'none';
-                    playSound('success');
                 });
                 break;
                 
@@ -307,7 +304,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                             
                             document.querySelector('.loading').style.display = 'none';
-                            playSound('success');
                         });
                     };
                     
@@ -320,7 +316,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         scene.add(currentModel);
                         updateMaterials();
                         document.querySelector('.loading').style.display = 'none';
-                        playSound('success');
                     });
                 }
                 break;
@@ -332,7 +327,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     scene.add(currentModel);
                     updateMaterials();
                     document.querySelector('.loading').style.display = 'none';
-                    playSound('success');
                 });
         }
     }
@@ -883,8 +877,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     loadModel(modelType);
                 }
-                
-                playSound('click');
             });
         });
         
@@ -919,14 +911,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('show-shadows').addEventListener('change', function(e) {
             settings.lighting.shadows = e.target.checked;
             updateLights();
-            playSound('click');
         });
         
         // Material Type
         document.getElementById('material-type').addEventListener('change', function(e) {
             settings.materials.type = e.target.value;
             updateMaterials();
-            playSound('click');
         });
         
         // Material Color Picker
@@ -953,7 +943,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('emissive-enabled').addEventListener('change', function(e) {
             settings.materials.emissiveEnabled = e.target.checked;
             updateMaterials();
-            playSound('click');
         });
         
         // Emissive Intensity Slider
@@ -967,7 +956,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('background-type').addEventListener('change', function(e) {
             settings.environment.backgroundType = e.target.value;
             updateBackground();
-            playSound('click');
         });
         
         // Background Color Picker
@@ -979,7 +967,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Auto Rotate Toggle
         document.getElementById('auto-rotate').addEventListener('change', function(e) {
             settings.environment.autoRotate = e.target.checked;
-            playSound('click');
         });
         
         // Reset Button
@@ -1024,7 +1011,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateBackground();
             updateMaterials();
             
-            playSound('success');
         });
         
         // Screenshot Button
@@ -1041,18 +1027,7 @@ document.addEventListener('DOMContentLoaded', function() {
             link.download = '3d-model-screenshot.png';
             link.click();
             
-            playSound('success');
         });
-    }
-    
-    // Sound effects
-    function playSound(soundName) {
-        // Check if window.sounds exists (from main.js)
-        if (window.sounds && window.sounds[soundName]) {
-            const soundClone = window.sounds[soundName].cloneNode();
-            soundClone.volume = 0.2;
-            soundClone.play().catch(e => console.log("Audio play failed:", e));
-        }
     }
     
     // Initialize the scene

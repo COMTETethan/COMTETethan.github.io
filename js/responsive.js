@@ -122,11 +122,6 @@ function enhanceResponsiveNavigation() {
         hamburger.addEventListener('click', function() {
             navList.classList.toggle('show');
             this.classList.toggle('active');
-            
-            // Play sound if available
-            if (window.soundSystem) {
-                window.soundSystem.playSound('click');
-            }
         });
         
         // Close menu when clicking outside

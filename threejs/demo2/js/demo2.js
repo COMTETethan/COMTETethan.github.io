@@ -133,8 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         particleSystem = new THREE.Points(particles, material);
         scene.add(particleSystem);
         
-        // Play sound effect
-        playSound('success');
+        playSound('uccess');
     }
     
     // Initialize swarm particles

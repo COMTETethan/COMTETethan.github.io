@@ -2,8 +2,6 @@
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize sound effects
-    initSounds();
     
     // Initialize custom cursor
     initCustomCursor();
@@ -29,43 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 500);
 });
 
-// Initialize sound effects
-function initSounds() {
-    // Create sound objects
-    window.sounds = {
-        hover: new Audio('/audio/hover.mp3'),
-        click: new Audio('/audio/click.mp3'),
-        success: new Audio('/audio/success.mp3')
-    };
-    
-    // Set volume
-    Object.values(window.sounds).forEach(sound => {
-        sound.volume = 0.2;
-    });
-    
-    // Add hover sound to all interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .model-option, .nav-item, .btn');
-    
-    interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', function() {
-            playSound('hover');
-        });
-        
-        element.addEventListener('click', function() {
-            playSound('click');
-        });
-    });
-}
-
-// Play sound effect
-function playSound(soundName) {
-    if (window.sounds && window.sounds[soundName]) {
-        // Clone the audio to allow overlapping sounds
-        const soundClone = window.sounds[soundName].cloneNode();
-        soundClone.volume = 0.2;
-        soundClone.play().catch(e => console.log("Audio play failed:", e));
-    }
-}
 
 // Initialize custom cursor
 function initCustomCursor() {
@@ -179,10 +140,7 @@ function initPageTransitions() {
             
             // Prevent default navigation
             e.preventDefault();
-            
-            // Play click sound
-            playSound('click');
-            
+                        
             // Add exit class to body
             document.body.classList.add('page-exit');
             
@@ -313,7 +271,6 @@ function initInteractiveElements() {
         hamburger.addEventListener('click', function() {
             navList.classList.toggle('show');
             this.classList.toggle('active');
-            playSound('click');
         });
     }
 }

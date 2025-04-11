@@ -11,11 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
             shadows: true
         },
         materials: {
-            type: 'standard',
-            color: '#00ffff',
-            metalness: 0.5,
-            roughness: 0.2,
             emissiveEnabled: true,
+            color: '#00ffff',
             emissiveIntensity: 0.3
         },
         environment: {
@@ -306,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const dracoLoader = new THREE.DRACOLoader();
             dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
             loader.setDRACOLoader(dracoLoader);
-
+    
             loader.load(path, (gltf) => {
                 const model = gltf.scene;
                 
@@ -316,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         node.receiveShadow = true;
                     }
                 });
-
+    
                 const box = new THREE.Box3().setFromObject(model);
                 const center = box.getCenter(new THREE.Vector3());
                 model.position.sub(center);
@@ -325,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const maxDim = Math.max(size.x, size.y, size.z);
                 const scale = 5 / maxDim;
                 model.scale.set(scale, scale, scale);
-
+    
                 resolve(model);
             }, undefined, reject);
         });
@@ -334,64 +331,30 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateMaterials() {
         if (!currentModel) return;
         
-        let material;
-        const color = new THREE.Color(settings.materials.color);
-        
-        switch (settings.materials.type) {
-            case 'standard':
-                material = new THREE.MeshStandardMaterial({
-                    color: color,
-                    metalness: settings.materials.metalness,
-                    roughness: settings.materials.roughness,
-                    emissive: settings.materials.emissiveEnabled ? color : 0x000000,
-                    emissiveIntensity: settings.materials.emissiveIntensity
-                });
-                break;
-                
-            case 'physical':
-                material = new THREE.MeshPhysicalMaterial({
-                    color: color,
-                    metalness: settings.materials.metalness,
-                    roughness: settings.materials.roughness,
-                    emissive: settings.materials.emissiveEnabled ? color : 0x000000,
-                    emissiveIntensity: settings.materials.emissiveIntensity,
-                    clearcoat: 0.5,
-                    clearcoatRoughness: 0.2
-                });
-                break;
-                
-            case 'toon':
-                material = new THREE.MeshToonMaterial({
-                    color: color,
-                    emissive: settings.materials.emissiveEnabled ? color : 0x000000,
-                    emissiveIntensity: settings.materials.emissiveIntensity
-                });
-                break;
-                
-            case 'wireframe':
-                material = new THREE.MeshBasicMaterial({
-                    color: color,
-                    wireframe: true
-                });
-                break;
-                
-            case 'normal':
-                material = new THREE.MeshNormalMaterial();
-                break;
-                
-            default:
-                material = new THREE.MeshStandardMaterial({
-                    color: color,
-                    metalness: settings.materials.metalness,
-                    roughness: settings.materials.roughness,
-                    emissive: settings.materials.emissiveEnabled ? color : 0x000000,
-                    emissiveIntensity: settings.materials.emissiveIntensity
-                });
-        }
-        
         currentModel.traverse(function(node) {
-            if (node.isMesh && !node.name.includes('window') && !node.name.includes('eye') && !node.name.includes('glow')) {
-                node.material = material;
+            if (node.isMesh && node.material) {
+                if (settings.materials.emissiveEnabled) {
+                    if (Array.isArray(node.material)) {
+                        node.material.forEach(mat => {
+                            mat.emissive = new THREE.Color(settings.materials.color);
+                            mat.emissiveIntensity = settings.materials.emissiveIntensity;
+                        });
+                    } else {
+                        node.material.emissive = new THREE.Color(settings.materials.color);
+                        node.material.emissiveIntensity = settings.materials.emissiveIntensity;
+                    }
+                } else {
+                    if (Array.isArray(node.material)) {
+                        node.material.forEach(mat => {
+                            mat.emissive = new THREE.Color(0x000000);
+                            mat.emissiveIntensity = 0;
+                        });
+                    } else {
+                        node.material.emissive = new THREE.Color(0x000000);
+                        node.material.emissiveIntensity = 0;
+                    }
+                }
+                
                 node.castShadow = true;
                 node.receiveShadow = true;
             }
@@ -441,52 +404,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        document.getElementById('ambient-light-slider').addEventListener('input', function(e) {
-            settings.lighting.ambientIntensity = parseFloat(e.target.value);
-            document.getElementById('ambient-light-value').textContent = settings.lighting.ambientIntensity.toFixed(2);
-            updateLights();
-        });
-        
-        document.getElementById('directional-light-slider').addEventListener('input', function(e) {
-            settings.lighting.directionalIntensity = parseFloat(e.target.value);
-            document.getElementById('directional-light-value').textContent = settings.lighting.directionalIntensity.toFixed(1);
-            updateLights();
-        });
-        
-        document.getElementById('light-color-picker').addEventListener('input', function(e) {
-            settings.lighting.color = e.target.value;
-            updateLights();
-        });
-        
-        document.getElementById('show-shadows').addEventListener('change', function(e) {
-            settings.lighting.shadows = e.target.checked;
-            updateLights();
-        });
-        
-        document.getElementById('material-type').addEventListener('change', function(e) {
-            settings.materials.type = e.target.value;
-            updateMaterials();
-        });
-        
-        document.getElementById('material-color-picker').addEventListener('input', function(e) {
-            settings.materials.color = e.target.value;
-            updateMaterials();
-        });
-        
-        document.getElementById('metalness-slider').addEventListener('input', function(e) {
-            settings.materials.metalness = parseFloat(e.target.value);
-            document.getElementById('metalness-value').textContent = settings.materials.metalness.toFixed(2);
-            updateMaterials();
-        });
-        
-        document.getElementById('roughness-slider').addEventListener('input', function(e) {
-            settings.materials.roughness = parseFloat(e.target.value);
-            document.getElementById('roughness-value').textContent = settings.materials.roughness.toFixed(2);
-            updateMaterials();
-        });
-        
         document.getElementById('emissive-enabled').addEventListener('change', function(e) {
             settings.materials.emissiveEnabled = e.target.checked;
+            updateMaterials();
+        });
+        
+        document.getElementById('emissive-color-picker').addEventListener('input', function(e) {
+            settings.materials.color = e.target.value;
             updateMaterials();
         });
         
@@ -496,54 +420,16 @@ document.addEventListener('DOMContentLoaded', function() {
             updateMaterials();
         });
         
-        document.getElementById('background-type').addEventListener('change', function(e) {
-            settings.environment.backgroundType = e.target.value;
-            updateBackground();
-        });
-        
-        document.getElementById('background-color-picker').addEventListener('input', function(e) {
-            settings.environment.backgroundColor = e.target.value;
-            updateBackground();
-        });
-        
-        document.getElementById('auto-rotate').addEventListener('change', function(e) {
-            settings.environment.autoRotate = e.target.checked;
-        });
-        
         document.getElementById('reset-button').addEventListener('click', function() {
-            settings.lighting.ambientIntensity = 0.3;
-            settings.lighting.directionalIntensity = 1.0;
-            settings.lighting.color = '#ffffff';
-            settings.lighting.shadows = true;
-            settings.materials.type = 'standard';
-            settings.materials.color = '#00ffff';
-            settings.materials.metalness = 0.5;
-            settings.materials.roughness = 0.2;
             settings.materials.emissiveEnabled = true;
+            settings.materials.color = '#00ffff';
             settings.materials.emissiveIntensity = 0.3;
-            settings.environment.backgroundType = 'color';
-            settings.environment.backgroundColor = '#0d0d0d';
-            settings.environment.autoRotate = true;
             
-            document.getElementById('ambient-light-slider').value = settings.lighting.ambientIntensity;
-            document.getElementById('ambient-light-value').textContent = settings.lighting.ambientIntensity.toFixed(2);
-            document.getElementById('directional-light-slider').value = settings.lighting.directionalIntensity;
-            document.getElementById('directional-light-value').textContent = settings.lighting.directionalIntensity.toFixed(1);
-            document.getElementById('light-color-picker').value = settings.lighting.color;
-            document.getElementById('show-shadows').checked = settings.lighting.shadows;
-            document.getElementById('material-type').value = settings.materials.type;
-            document.getElementById('material-color-picker').value = settings.materials.color;
-            document.getElementById('metalness-slider').value = settings.materials.metalness;
-            document.getElementById('metalness-value').textContent = settings.materials.metalness.toFixed(2);
-            document.getElementById('roughness-slider').value = settings.materials.roughness;
-            document.getElementById('roughness-value').textContent = settings.materials.roughness.toFixed(2);
             document.getElementById('emissive-enabled').checked = settings.materials.emissiveEnabled;
+            document.getElementById('emissive-color-picker').value = settings.materials.color;
             document.getElementById('emissive-intensity-slider').value = settings.materials.emissiveIntensity;
             document.getElementById('emissive-intensity-value').textContent = settings.materials.emissiveIntensity.toFixed(2);
-            document.getElementById('background-type').value = settings.environment.backgroundType;
-            document.getElementById('background-color-picker').value = settings.environment.backgroundColor;
-            document.getElementById('auto-rotate').checked = settings.environment.autoRotate;
-            
+
             updateLights();
             updateBackground();
             updateMaterials();

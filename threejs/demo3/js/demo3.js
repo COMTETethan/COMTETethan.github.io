@@ -285,15 +285,60 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    async function checkFileExists(url) {
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            return response.ok;
+        } catch (error) {
+            return false;
+        }
+    }
+    
     async function createSwordModel() {
+        const possiblePaths = [
+            '../models/elucidator_sword_art_online.glb',
+            './models/elucidator_sword_art_online.glb',
+            'models/elucidator_sword_art_online.glb'
+        ];
+        
+        for (const path of possiblePaths) {
+            if (await checkFileExists(path)) {
+                return loadGLBModel(path);
+            }
+        }
+        
         return loadGLBModel('../models/elucidator_sword_art_online.glb');
     }
     
     async function createWellModel() {
+        const possiblePaths = [
+            '../models/the_village_well.glb',
+            './models/the_village_well.glb',
+            'models/the_village_well.glb'
+        ];
+        
+        for (const path of possiblePaths) {
+            if (await checkFileExists(path)) {
+                return loadGLBModel(path);
+            }
+        }
+        
         return loadGLBModel('../models/the_village_well.glb');
     }
     
     async function createSpaceshipModel() {
+        const possiblePaths = [
+            '../models/spaceship_low_poly.glb',
+            './models/spaceship_low_poly.glb',
+            'models/spaceship_low_poly.glb'
+        ];
+        
+        for (const path of possiblePaths) {
+            if (await checkFileExists(path)) {
+                return loadGLBModel(path);
+            }
+        }
+        
         return loadGLBModel('../models/spaceship_low_poly.glb');
     }
 
@@ -304,8 +349,8 @@ document.addEventListener('DOMContentLoaded', function() {
             dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
             loader.setDRACOLoader(dracoLoader);
     
-            loader.load(path, (gltf) => {
-                const model = gltf.scene;
+            loader.load(path, (glb) => {
+                const model = glb.scene;
                 
                 model.traverse(node => {
                     if (node.isMesh) {
@@ -418,34 +463,6 @@ document.addEventListener('DOMContentLoaded', function() {
             settings.materials.emissiveIntensity = parseFloat(e.target.value);
             document.getElementById('emissive-intensity-value').textContent = settings.materials.emissiveIntensity.toFixed(2);
             updateMaterials();
-        });
-        
-        document.getElementById('reset-button').addEventListener('click', function() {
-            settings.materials.emissiveEnabled = true;
-            settings.materials.color = '#00ffff';
-            settings.materials.emissiveIntensity = 0.3;
-            
-            document.getElementById('emissive-enabled').checked = settings.materials.emissiveEnabled;
-            document.getElementById('emissive-color-picker').value = settings.materials.color;
-            document.getElementById('emissive-intensity-slider').value = settings.materials.emissiveIntensity;
-            document.getElementById('emissive-intensity-value').textContent = settings.materials.emissiveIntensity.toFixed(2);
-
-            updateLights();
-            updateBackground();
-            updateMaterials();
-            
-        });
-        
-        document.getElementById('screenshot-button').addEventListener('click', function() {
-            renderer.render(scene, camera);
-            
-            const dataURL = renderer.domElement.toDataURL('image/png');
-            
-            const link = document.createElement('a');
-            link.href = dataURL;
-            link.download = '3d-model-screenshot.png';
-            link.click();
-            
         });
     }
     

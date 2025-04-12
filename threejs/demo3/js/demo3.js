@@ -287,10 +287,22 @@ document.addEventListener('DOMContentLoaded', function() {
     
     async function checkFileExists(url) {
         try {
-            const response = await fetch(url, { method: 'HEAD' });
+            const response = await fetch(url, { 
+                method: 'HEAD',
+                mode: 'no-cors'
+            });
             return response.ok;
         } catch (error) {
-            return false;
+            try {
+                const response = await fetch(url, { 
+                    method: 'GET',
+                    mode: 'no-cors',
+                    cache: 'no-store'
+                });
+                return true;
+            } catch (e) {
+                return false;
+            }
         }
     }
     
